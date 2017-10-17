@@ -18,8 +18,6 @@
     <!-- Bootstrap core CSS -->
     <link href="../assets/bootstrap-4.0.0-alpha.6/dist/css/bootstrap.min.css" rel="stylesheet">
 
-    <!-- Custom styles for this template -->
-    <link href="navbar-top-fixed.css" rel="stylesheet">
   </head>
 
   <body>
@@ -42,22 +40,25 @@
             <a class="nav-link" href="#">Settings</a>
           </li>
         </ul>
-        <input "text" id="search-criteria"/>
-        <input type="button" id="search" value="search"/>
       </div>
     </nav>
 
   <div class="container" style="height: 100px;"></div>
 
   <div class="container">
+    <div class="form-group">
+      <h1>Create a new Bill:</h1>
+    </div>
 
     <div class="form-group row">
       <label for="example-text-input" class="col-2 col-form-label">Name of Bill:</label>
-      <input class="form-control" type="text" value="Insert name here" id="example-text-input">
+      <div class="col-10 input-group-addon">
+        <input class="form-control" type="text" placeholder="Insert name here" id="example-text-input">
+      </div>
     </div>
  
     <div class="form-group row" action="/action_page.php">
-      <label for="example-text-input" class="col-2 col-form-label">Date of purchase:</label>
+      <label for="example-text-input" class="col-2 col-form-label">Date of due:</label>
       <input type="date" name="bday">
       <input type="submit">
     </div>
@@ -70,56 +71,102 @@
         <option value="2">Electronics</option>
         <option value="3">Utilities</option>
         <option value="4">Party</option>
-        <option value="5">Other</option>
-        <option value="5">Other</option>
+        <option value="5">Loging</option>
+        <option value="6">Transportation</option>
+        <option value="7">Recreation</option>
+        <option value="8">Other</option>
       </select>
     </form>
 
     <div class="form-group row">
       <label for="example-text-input" class="col-2 col-form-label">Price:</label>
+      <input type="number" step="0.01" min="0" pattern="\d+" class="col-4 form-control-file" placeholder="Amount (to the nearest dollar)">
       <span class="input-group-addon">$</span>
-      <span class="input-group-addon">0.00</span>
-      <input type="text" class="form-control-file" aria-label="Amount (to the nearest dollar)">
     </div>
 
-<!--     <div class="form-group row">
-      <label for="example-text-input" class="col-2 col-form-label">Select People from list:</label>
-      <form action="/action_page.php">
-        <select name="cars" multiple>
-          <option value="volvo">Volvo</option>
-          <option value="saab">Saab</option>
-          <option value="opel">Opel</option>
-          <option value="audi">Audi</option>
-        </select>
-        <input class="input-group-addon" type="submit">
-      </form>
-    </div> -->
-
+    <div class="form-group row">
+        <label for="example-text-input" class="col-6 col-form-label">Add new payer(s):</label>
     <div class="container">
-      <div class="row">
-        <div class="control-group" id="fields">
-            <label class="control-label" for="field1">Nice Multiple Form Fields:</label>
-            <div class="controls"> 
-                <form role="form" autocomplete="off">
-                    <div class="entry input-group col-xs-3">
-                        <input class="form-control" name="fields[]" type="text" placeholder="Type something" />
-                        <span class="input-group-btn">
-                            <button class="btn btn-success btn-add" type="button" onclick="myFunction()">
-                                <span class="glyphicon glyphicon-plus">+</span>
-                            </button>
-                        </span>
-                    </div>
-                </form>
-            <br>
-            <small>Press <span class="glyphicon glyphicon-plus gs"></span> to add another form field :)</small>
-            </div>
+      <div class="row clearfix">
+        <div class="col-md-12 column">
+          <table class="table table-bordered table-hover" id="tab_logic">
+            <thead>
+              <tr >
+                <th class="text-center">
+                  #
+                </th>
+                <th class="text-center">
+                  Name
+                </th>
+                <th class="text-center">
+                  Mail
+                </th>
+                <th class="text-center">
+                  Amount ($)
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr id='addr0'>
+                <td>
+                  1
+                </td>
+                <td>
+                  <input type="text" name='name0'  placeholder='Name' class="form-control"/>
+                </td>
+                <td>
+                  <input type="text" name='mail0' placeholder='Mail' class="form-control"/>
+                </td>
+                <td>
+                  <input type="number" step="0.01" min="0" pattern="\d+" name='cost' placeholder='Due' class="form-control"/>
+                </td>
+              </tr>
+              <tr id='addr1'></tr>
+            </tbody>
+          </table>
         </div>
       </div>
+      <a id="add_row" type="button" class="btn btn-default pull-left">Add Row</a><a> </a><a id='delete_row' type="button" class="pull-right btn btn-default">Delete Row</a>
+    </div>
+    </div>
+
+    <div class="form-group row">
+      <label for="example-text-input" class="col-6 col-form-label">Payment Methods:</label>
+      <table class="table table-bordered table-hover" id="tab_logic">
+        <thead>
+          <tr>
+            <th class="text-center">
+              <span class="custom-control-description">Paypal</span>
+            </th>
+            <th class="text-center">
+              <span class="custom-control-description">e-Transfer</span>
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="text-center">
+              <label class="custom-control custom-checkbox mb-2 mr-sm-2 mb-sm-0" >
+                <input type="checkbox" class="custom-control-input">
+                <span class="custom-control-indicator"></span>
+              </label>
+            </td>
+            <td class="text-center">
+              <label class="custom-control custom-checkbox mb-2 mr-sm-2 mb-sm-0" >
+                <input type="checkbox" class="custom-control-input">
+                <span class="custom-control-indicator"></span>
+              </label>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
     </div>
 
     <div class="form-group row">
       <label for="example-text-input" class="col-2 col-form-label">Upload Bill Picture: (N.B.: not necessary)</label>
       <input type="file" class="form-control-file" id="exampleInputFile" aria-describedby="fileHelp">
+      <small>Press <span class="glyphicon glyphicon-plus gs"></span> to add another form field :)</small>
     </div>
 
     <div class="form-group row">
@@ -136,7 +183,7 @@
         <span class="custom-control-description">Set</span>
       </label>
     </div>
-    <button type="submit" class="btn btn-primary" style="float: left;">Submit</button>
+    <button type="submit" class="btn btn-primary" style="float: left;">Create bill</button>
   </div>
 
     <!-- Bootstrap core JavaScript
@@ -145,8 +192,6 @@
     <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
     <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
-    <script src="../../dist/js/bootstrap.min.js"></script>
-    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-    <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
+    <script src="../assets/bootstrap-4.0.0-alpha.6/dist/js/bootstrap.min.js"></script>
   </body>
 </html>
