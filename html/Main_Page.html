@@ -35,7 +35,7 @@
             <a class="nav-link" href="bill_creation_form.html" onClick="addBill()">Create New Bill</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Settings</a>
+            <a class="nav-link" href="Settings.html">Settings</a>
           </li>
         </ul>
 <input "text" id="search-criteria"/>
@@ -56,6 +56,21 @@
     <button id="clr">Clear Search</button>
 </div>
 
+<div id="popup" style="position:fixed;width:50%; height:50%; left:25%; top:25%; background:grey; display:none; z-index:2">
+	<div style="position:absolute; width:90%; height:90%; left:5%; top:5%">
+	<h4 style="color:white;text-align:center;font-size:50px;">Appartment Rent</h4>
+    <br/><br/><br/>
+    <h3 style="color:white;float:left">Ammount Due: &nbsp;</h3>
+    <h3 style="color:red">500.00$</h3>
+    <br/><br/><br/><br/><br/>
+    <h3 style="color:white;">Pay using:</h3>
+    <button id="payit">Credit Card</button>
+    <button id="payit">Direct Deposit</button>
+    <button id="payit">Cash</button>
+
+</div>
+</div>
+
 <div id="card-container">
 
     <div id="card1" class="container">
@@ -74,7 +89,7 @@
             <h4>Grocery trip with Dave & Tim</h4>
             </div>
 		    <p class="card-group">Bought food and drinks for housewarming supper with everyone. </p>
-            <a href="#" class="btn btn-primary">Pay</a>
+            <a href="javascript:void(0)" onClick="PayCard(card1)" class="btn btn-primary">Pay</a>
             <br></br>
 
               <div class="card-footer text-muted">
@@ -92,7 +107,7 @@
     </div>
 	
     <div id="card2" class="container">
-		<div style="background:white" class="card card-outline-warning">
+		<div id="appoutline" style="background:white" class="card card-outline-warning">
 		  <date style="display:none">20171101</date>
 		  <name style="display:none">Appartment Rent</name>
 		  <category style="display:none">Loging</category>
@@ -103,11 +118,11 @@
 		  </div>
 		  <div class="card-block">
 		    <div class="card-title">
-            <h4 style="float:right" class="text-warning">500.00$</h4>
+            <h4 id="apptext" style="float:right" class="text-warning">500.00$</h4>
             <h4>Appartment Rent</h4>
             </div>
 		    <p class="card-group">Rent payment to John Smith for room at 123 Main Street.</p>
-            <a href="#" class="btn btn-primary">Pay</a>
+            <a href="javascript:void(0)" onClick="PayCard(card2)" class="btn btn-primary">Pay</a>
             <br></br>
 
               <div class="card-footer text-muted">
@@ -117,8 +132,9 @@
 		  </div>
               
 		  <div class="alert">
-		  	<div class="alert alert-warning" role="alert">
- 				<strong>Due Soon!</strong> This bill is due in less than 2 weeks.
+		  	<div id="appalert" class="alert alert-warning" role="alert">
+ 				<div id="warning"><strong>Due Soon!</strong> This bill is due in less than 2 weeks.</div>
+ 				<div id="success" style="display:none"><strong>Payed Up!</strong> This bill is fully payed.</div>
 		  	</div>
 		  </div>
 		</div>
@@ -141,7 +157,7 @@
             <h4>Car Lease</h4>
             </div>
 		    <p class="card-group">Lease payment for a Honda Civic.</p>
-            <a href="#" class="btn btn-primary">Pay</a>
+            <a href="javascript:void(0)" onClick="PayCard(card3)" class="btn btn-primary">Pay</a>
             <br></br>
 
               <div class="card-footer text-muted">
@@ -169,7 +185,7 @@
             <h4>Drinks</h4>
             </div>
 		    <p class="card-group">Pay back Tim for all the drinks he bought for Christmas supper.</p>
-            <a href="#" class="btn btn-primary">Pay</a>
+            <a href="javascript:void(0)" onClick="PayCard(card4)" class="btn btn-primary">Pay</a>
             <br></br>
 
               <div class="card-footer text-muted">

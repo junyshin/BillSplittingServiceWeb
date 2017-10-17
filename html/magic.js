@@ -26,19 +26,11 @@ $("#search-criteria").keyup(function(event){
 			}	
 			$('#clr').show();
 		});
+     document.getElementById("search-criteria").value = "";
+
 	});
 });
 
-$('.contact-name').hide();
-$('#search').click(function(){
-    $('.contact-name').hide();
-    var txt = $('#search-criteria').val();
-    $('.contact-name').each(function(){
-       if($(this).text().toUpperCase().indexOf(txt.toUpperCase()) != -1){
-           $(this).show();
-       }
-    });
-});
 
 $( document ).ready(function() {
 	var alphBntClk = false;
@@ -102,3 +94,21 @@ $( document ).ready(function() {
 function HideCard(card) {
 	$(card).css("display", "none");
 }
+
+function PayCard(card) {
+		$('#popup').css("display", "block");
+}
+
+$( document ).ready(function() {
+	$('#payit').on('click', function () {
+		$('#popup').css("display", "none");
+		$('#apptext').removeClass("text-warning");
+		$('#apptext').addClass("text-success");
+		$('#appoutline').removeClass("card card-outline-warning");
+		$('#appoutline').addClass("card card-outline-success");
+		$('#appalert').removeClass("alert alert-warning");
+		$('#appalert').addClass("alert alert-success");
+		$('#warning').css("display", "none");
+		$('#success').css("display", "block");
+	})
+});
