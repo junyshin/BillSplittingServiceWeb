@@ -1,0 +1,190 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Fixed top navbar example for Bootstrap</title>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+    <!-- bill creation custom CSS -->
+    <link rel="stylesheet" type="text/css" href="../assets/css/bill_creation_form.css">
+    <script src="../assets/js/bill_creation_form.js"></script>
+
+    <!-- Bootstrap core CSS -->
+    <link href="../assets/bootstrap-4.0.0-alpha.6/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  </head>
+
+  <body>
+
+    <nav class="navbar navbar-toggleable-md navbar-inverse fixed-top bg-inverse">
+      <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <a class="navbar-brand" href="#">Jane Doe</a>
+      <a class="navbar-brand" href="#"><img style="border-radius:50%;height:40px" src="../images/person_female1600.png"></a>
+      <div class="collapse navbar-collapse" id="navbarCollapse">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item active">
+            <a class="nav-link" href="main_page.html">Dashboard<span class="sr-only">(current)</span></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="bill_creation_form.html" onClick="addBill()">Create New Bill</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Settings</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+
+  <div class="container" style="height: 100px;"></div>
+
+  <div class="container">
+    <div class="form-group">
+      <h1>Bill page:</h1>
+    </div>
+
+    <div class="form-group row">
+      <label for="example-text-input" class="col-2 col-form-label">Name of Bill:</label>
+      <div class="col-10 input-group-addon">
+        <h4>Water Park Trip</h4>
+      </div>
+    </div>
+ 
+    <div class="form-group row" action="/action_page.php">
+      <label for="example-text-input" class="col-2 col-form-label">Date of due:</label>
+      <h4>October 20th 2017</h4>
+    </div>
+
+    <form class="form-group row">
+      <label for="example-text-input" class="col-2 col-form-label">Label:</label>
+      <h4>Recreation</h4>
+    </form>
+
+    <div class="form-group row">
+      <label for="example-text-input" class="col-2 col-form-label">Price:</label>
+      <h4>125.84$</h4>
+    </div>
+
+    <div class="form-group row">
+    <label for="example-text-input" class="col-6 col-form-label">Payer(s):</label>
+    <div class="container">
+      <div class="row clearfix">
+        <div class="col-md-12 column">
+          <table class="table table-bordered table-hover" id="tab_logic">
+            <thead>
+              <tr >
+                <th class="text-center">
+                  #
+                </th>
+                <th class="text-center">
+                  Name
+                </th>
+                <th class="text-center">
+                  Mail
+                </th>
+                <th class="text-center">
+                  Amount ($)
+                </th>
+                <th class="text-center">
+                  Paid
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr id='addr0'>
+                <td class="text-center">
+                  1
+                </td>
+                <td class="text-center">
+                  <h4>Jone Doe</h4>
+                </td>
+                <td class="text-center">
+                  <h4>jone.doe@mail.mcgill.ca</h4>
+                </td>
+                <td class="text-center">
+                  <h4 style="color:green">125.84$</h4>
+                </td>
+                <td class="text-center">
+                  &#10004
+                </td>
+              </tr>
+              <tr id='addr1'>
+                <td class="text-center">
+                  1
+                </td>
+                <td class="text-center">
+                  <h4>Jone Doe</h4>
+                </td>
+                <td class="text-center">
+                  <h4>jone.doe@mail.mcgill.ca</h4>
+                </td>
+                <td class="text-center">
+                  <h4 style="color:green">125.84$</h4>
+                </td>
+                <td class="text-center">
+                  &#10004
+                </td>
+              </tr>
+              <tr id='addr2'>
+                <td class="text-center">
+                  1
+                </td>
+                <td class="text-center">
+                  <h4>Peter Lee</h4>
+                </td>
+                <td class="text-center">
+                  <h4>peter.lee@mail.mcgill.ca</h4>
+                </td>
+                <td class="text-center">
+                  <h4 style="color:red">125.84$</h4>
+                </td>
+                <td class="text-center">
+                  &#10008
+                </td>
+              </tr>
+
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    </div>
+
+    <div class="form-group row">
+      <label for="example-text-input" class="col-2 col-form-label">Upload Bill Picture: (N.B.: not necessary)</label>
+      <h4>No file.</h4>
+    </div>
+
+    <div class="form-group row">
+      <label for="example-text-input" class="col-2 col-form-label">Repeat Bill:</label>
+      <select class="custom-select mb-2 mr-sm-2 mb-sm-0" id="inlineFormCustomSelect">
+        <option selected>Choose...</option>
+        <option value="1">Weekly</option>
+        <option value="2">Bi-Weekly</option>
+        <option value="3">Monthly</option>
+      </select>
+      <label class="custom-control custom-checkbox mb-2 mr-sm-2 mb-sm-0">
+        <input type="checkbox" class="custom-control-input">
+        <span class="custom-control-indicator"></span>
+        <span class="custom-control-description">Set</span>
+      </label>
+    </div>
+    <button type="submit" class="btn btn-primary" style="float: left;">Update bill</button>
+  </div>
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
+    <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+    <script src="../assets/bootstrap-4.0.0-alpha.6/dist/js/bootstrap.min.js"></script>
+  </body>
+</html>
