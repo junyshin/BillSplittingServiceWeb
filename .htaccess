@@ -1,0 +1,4 @@
+AuthType Basic
+AuthName "HCI Project access restricted"
+AuthUserFile /home/jshin22/www/HCIWebPage/webpasswords/.htpasswd
+require valid-user
