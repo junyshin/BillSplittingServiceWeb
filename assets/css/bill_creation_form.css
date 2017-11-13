@@ -15,3 +15,72 @@
 #field {
     margin-bottom:20px;
 }
+
+#addr0:hover{
+	background: white;
+}
+
+#addr1:hover{
+	background: white;
+}
+
+#addr2:hover{
+	background: white;
+}
+#addr3:hover{
+	background: white;
+}
+
+#addr4:hover{
+	background: white;
+}
+
+#addr5:hover{
+	background: white;
+}
+
+#addr6:hover{
+	background: white;
+}
+
+#addr7:hover{
+	background: white;
+}
+
+#addr8:hover{
+	background: white;
+}
+
+#addr9:hover{
+	background: white;
+}
+
+#addr10:hover{
+	background: white;
+}
+
+#addr11:hover{
+	background: white;
+}
+
+#addr12:hover{
+	background: white;
+}
+
+#question{
+	display: none;
+	position:fixed;
+	width: 50%;
+	left: 25%;
+	height: 50%;
+	top: 25%;
+	background: #CCC;
+	z-index: 2;
+	}
+	
+.content{
+	position:absolute;
+	width: 90%;
+	height: 90%;
+	left: 5%;
+	top: 5%;}

@@ -13,6 +13,7 @@
 
     <!-- Bootstrap core CSS -->
     <link href="../assets/bootstrap-4.0.0-alpha.6/dist/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+    <link href="../assets/css/main_page_custom.css" rel="stylesheet" type="text/css">
 
     <!-- Custom styles for this template -->
     <link href="navbar-top-fixed.css" rel="stylesheet" type="text/css">
@@ -24,8 +25,8 @@
       <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
-      <a class="navbar-brand" href="#">Jane Doe</a>
-      <a class="navbar-brand" href="#"><img style="border-radius:50%;height:40px" src="../images/person_female1600.png"></a>
+      <a class="navbar-brand" href="Main_Page.html">Jane Doe</a>
+      <a class="navbar-brand" href="Settings.html"><img style="border-radius:50%;height:40px" src="../images/person_female1600.png"></a>
       <div class="collapse navbar-collapse" id="navbarCollapse">
         <ul class="navbar-nav mr-auto">
           <li class="nav-item active">
@@ -58,9 +59,11 @@
     <button id="clr">Clear Search</button>
 </div>
 
+
 <div id="popup" style="position:fixed;width:50%; height:50%; left:25%; top:25%; background:grey; display:none; z-index:2">
 	<div style="position:absolute; width:90%; height:90%; left:5%; top:5%">
 	<h4 style="color:white;text-align:center;font-size:50px;">Appartment Rent</h4>
+    <a href="#" style="text-decoration:none; color:black; font-size:30px;position:absolute; right:10px; top:10px"><strong id="closeit">X</strong></a>
     <br/><br/><br/>
     <h3 style="color:white;float:left">Ammount Due: &nbsp;</h3>
     <h3 style="color:red">500.00$</h3>
@@ -69,8 +72,7 @@
     <button id="payit">Credit Card</button>
     <button id="payit">Direct Deposit</button>
     <button id="payit">Cash</button>
-
-</div>
+	</div>
 </div>
 
 <div id="card-container">
@@ -107,7 +109,7 @@
 		</div>
 	   <br/>
     </div>
-	
+
     <div id="card2" class="container">
 		<div id="appoutline" style="background:white" class="card card-outline-warning">
 		  <date style="display:none">20171101</date>
@@ -121,7 +123,7 @@
 		  <div class="card-block">
 		    <div class="card-title">
             <h4 id="apptext" style="float:right" class="text-warning">500.00$</h4>
-            <a href="Bill_template_02.html" style="color:black"><h4>Appartment Rent</h4></a>
+            <h4>Appartment Rent</h4>
             </div>
 		    <p class="card-group">Rent payment to John Smith for room at 123 Main Street.</p>
             <a href="javascript:void(0)" onClick="PayCard(card2)" class="btn btn-primary">Pay</a>
@@ -142,7 +144,7 @@
 		</div>
     	<br/>	
     </div>
-        
+      
     <div id="card3" class="container">
 		<div style="background:white" class="card">
 		  <date style="display:none">20171101</date>
@@ -200,9 +202,9 @@
     
     <div id="card5" class="container">
 		<div style="background:white" class="card card-outline-warning">
-		  <date style="display:none">20170920</date>
+		  <date style="display:none">20171020</date>
 		  <name style="display:none">Water Park Trip</name>
-		  <category style="display:none">Recreation</category>
+          <category style="display:none">Recreation</category>
 
 		  <div class="card-header">
 		    <div style="float:right"><a style="text-decoration:none; color:black;" href="javascript:void(0)" onClick="HideCard(card5)"><strong>X</strong></a></div>
@@ -211,11 +213,12 @@
 		  <div class="card-block">
 		    <div class="card-title">
             <h4 style="float:right" class="text-warning">125.84$</h4>
-            <a href="Bill_template_01.html" style="color:black"><h4>Water Park Trip</h4></a>
+            <h4>Water Park Trip</h4>
             </div>
 		    <p class="card-group">Money owed to Jane Doe for buying everyone's entrance to Val-Cartier water park.</p>
-			<a href="javascript:void(0)" onClick="PayCard(card4)" class="btn btn-primary">Pay</a>
-			<br/><br> 	
+			<br/>
+   			<h6 style="font-style:italic">Peter Lee has not yet paid!</h6>		 
+			<br/> 	
               <div class="card-footer text-muted">
                 Bill due: October 20th 2017 <br/>
               </div>
@@ -246,7 +249,6 @@
             <h4>Kitchen Set</h4>
             </div>
 		    <p class="card-group">Contribute to payment for the new dinning furniture set.</p>
-
               <div class="card-footer text-muted">
                 Bill due: October 1st 2017 <br/>
               </div>

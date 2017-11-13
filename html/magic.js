@@ -112,3 +112,21 @@ $( document ).ready(function() {
 		$('#success').css("display", "block");
 	})
 });
+
+$( document ).ready(function() {
+	$('#closeit').on('click', function () {
+		$('#popup').css("display", "none");
+	})
+});
+
+$( document ).ready(function() {
+	$('#card2').on('click', function () {
+		document.location.href = ('Bill_template_02.html');
+	})
+});
+
+$( document ).ready(function() {
+	$('#card5').on('click', function () {
+		document.location.href = ('Bill_template_01.html');
+	})
+});

@@ -1,4 +1,4 @@
-
+	
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -7,7 +7,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Fixed top navbar example for Bootstrap</title>
+    <title>Create A Bill</title>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
@@ -26,8 +26,8 @@
       <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
-      <a class="navbar-brand" href="#">Jane Doe</a>
-      <a class="navbar-brand" href="#"><img style="border-radius:50%;height:40px" src="../images/person_female1600.png"></a>
+      <a class="navbar-brand" href="Main_Page.html">Jane Doe</a>
+      <a class="navbar-brand" href="Settings.html"><img style="border-radius:50%;height:40px" src="../images/person_female1600.png"></a>
       <div class="collapse navbar-collapse" id="navbarCollapse">
         <ul class="navbar-nav mr-auto">
           <li class="nav-item">
@@ -52,36 +52,48 @@
     <div class="form-group">
       <h1>Create a new Bill:</h1>
     </div>
-
+	
     <div class="form-group row">
       <label for="example-text-input" class="col-2 col-form-label">Name of Bill:</label>
       <div class="col-10 input-group-addon">
-        <input class="form-control" type="text" placeholder="Insert name here" id="example-text-input">
+        <input onblur="checkTextField(this);" class="form-control" type="text" placeholder="Insert name here" id="example-text-input">
+      	<p id="error">Please give your bill a name</p>
       </div>
     </div>
- 
+
     <div class="form-group row" action="/action_page.php">
-      <label for="example-text-input" class="col-2 col-form-label">Date of due:</label>
-      <input type="date" name="bday">
-      <input type="submit">
-    </div>
+        <label for="example-text-input" class="col-2 col-form-label">Due date:</label>
+     
+     	<div class="col-10 input-group-addon">
+      <input style="width:145px" onblur="checkDateField(this);" type="date" name="date">
+      <p id="errorDate">Please give your a bill a due date</p>
+</div>
+</div>
 
     <form class="form-group row">
-      <label for="example-text-input" class="col-2 col-form-label">Label:</label>
+      <label for="example-text-input" class="col-2 col-form-label">Category:</label>
       <select class="custom-select mb-2 mr-sm-2 mb-sm-0" id="inlineFormCustomSelect">
-        <option selected>Choose...</option>
-        <option value="1">Food</option>
+        <option value="1">Other</option>
         <option value="2">Electronics</option>
         <option value="3">Utilities</option>
-        <option value="4">Loging</option>
+        <option value="4">Logging</option>
         <option value="5">Transportation</option>
         <option value="6">Recreation</option>
-        <option value="7">Other</option>
+        <option value="7">Food</option>
       </select>
     </form>
 
+	<div id="question">
+    	<div class="content">
+    	<a href="#" onClick="closequestion()"><h3 style="float:right; padding-left:2px"><strong>X</strong></h3></a>
+    	<h3 style="text-align:center">How to add payers</h3>
+    	<p>The bill needs </p>
+        </div>
+    </div>
+
     <div class="form-group row">
-        <label for="example-text-input" class="col-6 col-form-label">Add payer(s):</label>
+        <label for="example-text-input" class="col-6 col-form-label">Who are you splitting this bill with?:</label>
+        <a href="#" onClick="question()"><img style="width: 30px; position:absolute; left: 275px;" src="../images/question.png"/></a>
     <div class="container">
       <div class="row clearfix">
         <div class="col-md-12 column">
@@ -95,14 +107,29 @@
                   Name
                 </th>
                 <th class="text-center">
-                  Mail
+                  e-mail
                 </th>
                 <th class="text-center">
                   Amount ($)
                 </th>
               </tr>
+              <tr>
+                <th class="text-center">
+                  <div style="font-weight:300">You</div>
+                </th>
+                <th class="text-center">
+                  <div style="font-weight:300">Jane Doe</div>
+                </th>
+                <th class="text-center">
+                  <div style="font-weight:300">janedoe@mail.com	</div>
+                </th>
+                <td>
+                  <input id="youammount" type="number" step="0.01" min="0" pattern="\d+" name='cost' placeholder='Amount Due' class="form-control"/>
+                </td>
+              </tr>
             </thead>
-            <tbody>
+            
+            <tbody class="text-entry">
               <tr id='addr0'>
                 <td>
                   1
@@ -111,10 +138,10 @@
                   <input type="text" name='name0'  placeholder='Name' class="form-control"/>
                 </td>
                 <td>
-                  <input type="text" name='mail0' placeholder='Mail' class="form-control"/>
+                  <input type="text" name='mail0' placeholder='e-mail' class="form-control"/>
                 </td>
                 <td>
-                  <input type="number" step="0.01" min="0" pattern="\d+" name='cost' placeholder='Due' class="form-control"/>
+                  <input type="number" step="0.01" min="0" pattern="\d+" name='cost' placeholder='Amount Due' class="form-control"/>
                 </td>
               </tr>
               <tr id='addr1'></tr>
@@ -128,7 +155,8 @@
 	
    
     <div class="form-group row">
-      <label for="example-text-input" class="col-6 col-form-label">Payment Methods:</label>
+      <label for="example-text-input" class="col-6 col-form-label">Payment Methods Accepted: (Please select at least one)</label>
+      
       <table class="table table-bordered table-hover" id="tab_logic">
         <thead>
           <tr>
@@ -139,27 +167,27 @@
               <span class="custom-control-description">e-Transfer</span>
             </th>
             <th class="text-center">
-              <span class="custom-control-description">cash</span>
+              <span class="custom-control-description">Cash</span>
             </th>
           </tr>
         </thead>
         <tbody>
-          <tr>
+          <tr id="addr0">
             <td class="text-center">
               <label class="custom-control custom-checkbox mb-2 mr-sm-2 mb-sm-0" >
-                <input type="checkbox" class="custom-control-input">
+                <input type="checkbox" class="custom-control-input" id="paypal" value="paypal">
                 <span class="custom-control-indicator"></span>
               </label>
             </td>
             <td class="text-center">
               <label class="custom-control custom-checkbox mb-2 mr-sm-2 mb-sm-0" >
-                <input type="checkbox" class="custom-control-input">
+                <input type="checkbox" class="custom-control-input" id="etransfer" value="etransfer">
                 <span class="custom-control-indicator"></span>
               </label>
             </td>
             <td class="text-center">
               <label class="custom-control custom-checkbox mb-2 mr-sm-2 mb-sm-0" >
-                <input type="checkbox" class="custom-control-input">
+                <input type="checkbox" class="custom-control-input" id="cash" value="cash">
                 <span class="custom-control-indicator"></span>
               </label>
             </td>
@@ -170,35 +198,27 @@
     </div>
 
     <div class="form-group row">
-      <label for="example-text-input" class="col-2 col-form-label">Upload Bill Picture: (N.B.: not necessary)</label>
+      <label for="example-text-input" class="col-2 col-form-label">Upload Bill Picture: (Optional)</label>
       <input type="file" class="form-control-file" id="exampleInputFile" aria-describedby="fileHelp">
-      <small>Press <span class="glyphicon glyphicon-plus gs"></span> to add another form field :)</small>
     </div>
 
     <div class="form-group row">
-      <label for="example-text-input" class="col-2 col-form-label">Comment:</label>
+      <label for="example-text-input" class="col-2 col-form-label">Comment: <br/>(Optional)</label>
       <textarea rows="4" cols="50" name="comment" form="usrform" placeholder="Enter text here..."></textarea>
     </div>
 
     <div class="form-group row">
-      <label for="example-text-input" class="col-2 col-form-label">Repeat Bill:</label>
+      <label for="example-text-input" class="col-2 col-form-label">This bill should be payed:</label>
       <select class="custom-select mb-2 mr-sm-2 mb-sm-0" id="inlineFormCustomSelect">
-        <option selected>Choose...</option>
-        <option value="1">Weekly</option>
-        <option value="2">Every 2 weeks</option>
-        <option value="3">Monthly</option>
-        <option value="4">Yearly</option>
+        <option selected>One time only</option>
+        <option value="1">Once a week</option>
+        <option value="2">Once every 2 weeks</option>
+        <option value="3">Once a month</option>
+        <option value="4">Once a year</option>
 
       </select>
-      <label class="custom-control custom-checkbox mb-2 mr-sm-2 mb-sm-0">
-        <input type="checkbox" class="custom-control-input">
-        <span class="custom-control-indicator"></span>
-        <span class="custom-control-description">Set</span>
-      </label>
     </div>
-<form action="Main_Page_Dummy_Bill.html" method="POST">
-   <button type="submit">Create Bill</button>
-</form>   
+   <button onClick="validate()" type="submit">Create Bill</button>
  </div>
 
     <!-- Bootstrap core JavaScript
