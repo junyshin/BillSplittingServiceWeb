@@ -96,7 +96,9 @@ function HideCard(card) {
 }
 
 function PayCard(card) {
-		$('#popup').css("display", "block");
+    event.cancelBubble = true;
+    if(event.stopPropagation) event.stopPropagation();
+	$('#popup').css("display", "block");
 }
 
 $( document ).ready(function() {
