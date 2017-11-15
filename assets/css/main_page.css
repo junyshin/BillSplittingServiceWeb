@@ -89,6 +89,7 @@ li a:hover:not(.active) {
 }
 
 .card {
-	position: 
+	position: relative;
+    left: -20px;
 
 }
