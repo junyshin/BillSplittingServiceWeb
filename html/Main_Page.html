@@ -46,13 +46,30 @@
       </div>
     </nav>
 
-	<div class="spacer" style="height:60px"><p></p></div>    
+<div class="spacer" style="height:60px"><p></p></div>    
 <div style="position:absolute; left: 10px; float:none; width: 100px; line-height: 25px;">
 	<h3>Sort By:</h3>
     <button style="margin-top:10px" id="alphBnt">Name</button>
     <button style="margin-top:10px" id="numBnt">Date Due</button>
     <button style="margin-top:10px" id="catBnt">Category</button>
+    <button style="margin-top:10px" id="priorBnt">Priority</button>
 </div>
+
+<div style="position:absolute; left: 10px; top:320px; float:none; width: 300px; line-height: 25px;">
+	<h3>Currently Sorted by:</h3>
+	<div id="soon"><p><strong>Date Due</strong><br/>Due soonest to due latest.</p></div>
+	<div id="late"><p><strong>Date Due</strong><br/>Due latest to due soonest.</p></div>
+    
+	<div id="alpha"><p><strong>Name</strong><br/>Sorted alphabetically from A to Z.</p></div>
+	<div id="antialpha"><p><strong>Name</strong><br/>Sorted alphabetically from Z to A.</p></div>
+    
+ 	<div id="cat"><p><strong>Category</strong><br/>Grouped by category. Categories sorted from A to Z.</p></div>
+	<div id="anticat"><p><strong>Category</strong><br/>Grouped by category. Categories sorted from Z to A.</p></div>
+    
+  	<div id="important"><p><strong>Piority</strong><br/>Bills you must pay as soon as possible.</p></div>
+	<div id="notimportant"><p><strong>Priority</strong><br/>Bills you do not need to worry about now.</p></div>
+</div>
+
 
 <div style="position:absolute; right: 10px;">
     <button id="clr">Clear Search</button>
@@ -81,6 +98,7 @@
 		  <date style="display:none">20171001</date>
 		  <name style="display:none">Grocery trip with Dave & Tim</name>
 		  <category style="display:none">Food</category>
+		  <priority style="display:none">3</priority>
 
           <div class="card-header">
 		    <div style="float:right"><a style="text-decoration:none; color:black;" href="javascript:void(0)" onClick="HideCard(card1)"><strong>X</strong></a></div>
@@ -109,14 +127,15 @@
 	   <br/>
     </div>
 
-    <div id="card2" class="container">
+    <div id="card2" class="container"  onClick="goto('Bill_template_02.html')">
 		<div id="appoutline" style="background:white" class="card card-outline-warning">
 		  <date style="display:none">20171101</date>
 		  <name style="display:none">Appartment Rent</name>
 		  <category style="display:none">Loging</category>
+		  <priority style="display:none">2</priority>
 
 		  <div class="card-header">
-		    <div style="float:right"><a style="text-decoration:none; color:black;" href="javascript:void(0)" onClick="HideCard(card2)"><strong>X</strong></a></div>
+		    <div style="float:right;"><a style="text-decoration:none; color:black;" href="javascript:void(0)" onClick="HideCard(card2)"><strong>X</strong></a></div>
 		    Loging - Payable to John Smith
 		  </div>
 		  <div class="card-block">
@@ -146,9 +165,10 @@
       
     <div id="card3" class="container">
 		<div style="background:white" class="card">
-		  <date style="display:none">20171101</date>
+		  <date style="display:none">20171201</date>
 		  <name style="display:none">Car Lease</name>
 		  <category style="display:none">Transportation</category>
+		  <priority style="display:none">1</priority>
 
 		  <div class="card-header">
 		    <div style="float:right"><a style="text-decoration:none; color:black;" href="javascript:void(0)" onClick="HideCard(card3)"><strong>X</strong></a></div>
@@ -174,9 +194,10 @@
      
      <div id="card4" class="container">
 		<div style="background:white" class="card">
-		  <date style="display:none">20171125</date>
+		  <date style="display:none">20171225</date>
 		  <name style="display:none">Drinks</name>
 		  <category style="display:none">Food</category>
+		  <priority style="display:none">1</priority>
 
 		  <div class="card-header">
 		    <div style="float:right"><a style="text-decoration:none; color:black;" href="javascript:void(0)" onClick="HideCard(card4)"><strong>X</strong></a></div>
@@ -199,11 +220,12 @@
     <br/>    
 	</div>
     
-    <div id="card5" class="container">
+    <div id="card5" class="container" onClick="goto('Bill_template_01.html')">
 		<div style="background:white" class="card card-outline-warning">
 		  <date style="display:none">20171020</date>
 		  <name style="display:none">Water Park Trip</name>
           <category style="display:none">Recreation</category>
+		  <priority style="display:none">2</priority>
 
 		  <div class="card-header">
 		    <div style="float:right"><a style="text-decoration:none; color:black;" href="javascript:void(0)" onClick="HideCard(card5)"><strong>X</strong></a></div>
@@ -237,6 +259,7 @@
 		  <date style="display:none">20170901</date>
 		  <name style="display:none">Kitchen Set</name>
 		  <category style="display:none">Loging</category>
+		  <priority style="display:none">0</priority>
 
 		  <div class="card-header">
 		    <div style="float:right"><a style="text-decoration:none; color:black;" href="javascript:void(0)" onClick="HideCard(card6)"><strong>X</strong></a></div>
@@ -267,6 +290,7 @@
 		  <date style="display:none">20171101</date>
 		  <name style="display:none">Internet Bill</name>
 		  <category style="display:none">Utility</category>
+		  <priority style="display:none">0</priority>
 
 		  <div class="card-header">
 		    <div style="float:right"><a style="text-decoration:none; color:black;" href="javascript:void(0)" onClick="HideCard(card7)"><strong>X</strong></a></div>

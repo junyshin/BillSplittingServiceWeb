@@ -31,14 +31,18 @@ $("#search-criteria").keyup(function(event){
 	});
 });
 
-
 $( document ).ready(function() {
 	var alphBntClk = false;
 	var numBtnClk = false;
 	var catBtnClk = false;
-
+	var priorBtnClk = true;
 	var $divs = $("div.container");
-	
+
+		var priorityOrderedDivs = $divs.sort(function (a, b) {
+			return $(a).find("priority").text() < $(b).find("priority").text();
+		});
+		$("#card-container").html(priorityOrderedDivs);
+		
 	$('#alphBnt').on('click', function () {
 		if(!alphBntClk){	
 		var alphabeticallyOrderedDivs = $divs.sort(function (a, b) {
@@ -53,6 +57,8 @@ $( document ).ready(function() {
 		});
 		$("#card-container").html(alphabeticallyOrderedDivs);
 		}
+		
+		selected(alphBntClk,numBtnClk,catBtnClk,priorBtnClk, 0);
 		alphBntClk = !alphBntClk;
 	});
 	
@@ -70,8 +76,9 @@ $( document ).ready(function() {
 		});
 		$("#card-container").html(numericallyOrderedDivs);
 		}
+		selected(alphBntClk,numBtnClk,catBtnClk,priorBtnClk, 1);
 		numBtnClk = !numBtnClk;	
-	});
+});
 
 	$('#catBnt').on('click', function () {
 		if(!catBtnClk){	
@@ -87,11 +94,33 @@ $( document ).ready(function() {
 		});
 		$("#card-container").html(alphabeticallyOrderedDivs);
 		}
+		selected(alphBntClk,numBtnClk,catBtnClk,priorBtnClk, 2);
 		catBtnClk = !catBtnClk;
-	});	
+});	
+	
+	$('#priorBnt').on('click', function () {
+		if(!priorBtnClk){
+		var priorityOrderedDivs = $divs.sort(function (a, b) {
+			return $(a).find("priority").text() < $(b).find("priority").text();
+		});
+		$("#card-container").html(priorityOrderedDivs);
+		}
+		
+		else{
+		var priorityOrderedDivs = $divs.sort(function (a, b) {
+			return $(a).find("priority").text() > $(b).find("priority").text();
+		});
+		$("#card-container").html(priorityOrderedDivs);
+		}
+		selected(alphBntClk,numBtnClk,catBtnClk,priorBtnClk, 3);
+		priorBtnClk = !priorBtnClk;	
+});
 });
 
+var duegoto = true;
+
 function HideCard(card) {
+	duegoto = false;
 	$(card).css("display", "none");
 }
 
@@ -121,14 +150,64 @@ $( document ).ready(function() {
 	})
 });
 
-$( document ).ready(function() {
-	$('#card2').on('click', function () {
-		document.location.href = ('Bill_template_02.html');
-	})
-});
 
-$( document ).ready(function() {
-	$('#card5').on('click', function () {
-		document.location.href = ('Bill_template_01.html');
-	})
-});
+function goto(link){
+		if(duegoto){	
+		document.location.href = (link);
+		}
+		duegoto = true;
+	}
+
+function alloff(){
+	$('#soon').css("display", "none");
+	$('#late').css("display", "none");
+	
+	$('#alpha').css("display", "none");
+	$('#antialpha').css("display", "none");
+	
+	$('#cat').css("display", "none");
+	$('#anticat').css("display", "none");
+
+	$('#important').css("display", "none");
+	$('#notimportant').css("display", "none");
+}
+
+function selected(alphBntClk,numBtnClk,catBtnClk,priorBtnClk, state){
+	
+	alloff()
+	
+	if(state == 0){
+		if(alphBntClk){
+		$('#antialpha').css("display", "block");
+		}
+		else{
+	$('#alpha').css("display", "block");
+			}
+	}
+	if(state == 1){
+		if(numBtnClk){
+	$('#late').css("display", "block");
+	
+		}
+		else{
+	$('#soon').css("display", "block");
+			}
+	}
+	if(state == 2){
+		if(catBtnClk){
+	$('#anticat').css("display", "block");
+		}
+		else{
+	$('#cat').css("display", "block");
+			}
+	}
+	if(state == 3){
+		if(priorBtnClk){
+	$('#notimportant').css("display", "block");
+		}
+		else{
+	$('#important').css("display", "block");
+			}
+	}
+	
+}

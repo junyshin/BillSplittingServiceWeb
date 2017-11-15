@@ -20,14 +20,14 @@ var date= "";
 
 function checkTextField(field) {
   document.getElementById("error").innerText =
-    (field.value === "") ? "Please give your bill a name" : "";
+    (field.value === "") ? "Please enter your bill a name" : "";
 	name = field.value;
 }
 
 
 function checkDateField(field) {
   document.getElementById("errorDate").innerText =
-    (field.value === "") ? "Please give your a bill a due date" : "";
+    (field.value === "") ? "Please enter your a bill a due date" : "";
 	date = field.value;
 }
 
@@ -35,6 +35,7 @@ function validate(){
 	var isname = false;
 	var isdate = false;
 	var isyouammount = false;
+	var ispayment = false;
 	var ispaypal = $("#paypal").is(":checked");
 	var isetransfer = $("#etransfer").is(":checked");
 	var iscash = $("#cash").is(":checked");
@@ -55,8 +56,8 @@ function validate(){
 		isdate = true;
 		}
 	
-	if(youammount == 0){	
-		alert('You are not contributing to this bill. Please enter the amount of this bill you owe in the text area next to your e-mail adress');
+	if(youammount === ""){	
+		alert('You are not contributing to this bill. Please enter the amount of this bill you owe in the text area next to your e-mail adress.');
 	}
 	else{
 	isyouammount = true
@@ -69,7 +70,7 @@ function validate(){
 		ispayment = true
 		}
 		
-	if(isname && isdate){
+	if(isname && isdate && isyouammount && ispayment){
 	document.location.href = ('Main_Page_Dummy_Bill.html');
 	}
 }

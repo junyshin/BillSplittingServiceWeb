@@ -56,7 +56,7 @@
       <label for="example-text-input" class="col-2 col-form-label">Name of Bill:</label>
       <div class="col-10 input-group-addon">
         <input onblur="checkTextField(this);" class="form-control" type="text" placeholder="Insert name here" id="example-text-input">
-      	<p id="error">Please give your bill a name</p>
+      	<p id="error">Please enter your bill a name</p>
       </div>
     </div>
 
@@ -65,7 +65,7 @@
      
      	<div class="col-10 input-group-addon">
       <input style="width:145px" onblur="checkDateField(this);" type="date" name="date">
-      <p id="errorDate">Please give your a bill a due date</p>
+      <p id="errorDate">Please enter your a bill a due date</p>
 </div>
 </div>
 
@@ -91,6 +91,10 @@
       <p>Add the amount they owe in the bill to you as an amount ($).</p>
       <p>Too add more payers, click the "Add Row" button.</p>
       <p>To delete a row, click "Delete Row" button and it will delete the last row in the list.</p>
+      <br/>
+      <br/>
+    	<h3 style="text-align:center">Why is my name already written?</h3>
+      	<p>Since you are creating a bill you are automatically considered to be participating in the payment of this bill. You may enter 0 if for some reason you do not owe any part of the payment for this bill,</p>
         </div>
     </div>
 
@@ -127,7 +131,7 @@
                   <div style="font-weight:300">janedoe@mail.com	</div>
                 </th>
                 <td>
-                  <input id="youammount" type="number" step="0.01" min="0" pattern="\d+" name='cost' placeholder='Amount Due' class="form-control"/>
+                  <input id="youammount" type="number" step="0.01" min="0" pattern="\d+" name='cost' placeholder='How much of this bill do you owe?' class="form-control"/>
                 </td>
               </tr>
             </thead>
