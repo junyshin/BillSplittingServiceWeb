@@ -125,10 +125,16 @@ var alertdangermine = '<div class="alert">\
 		  
 var alertsuccess = '<div class="alert">\
 		  	<div class="alert alert-success" role="alert">\
- 				<strong>Payed Up!</strong> This bill is fully payed.\
+ 				<strong>Payed Up!</strong> You have paid your part of this bill.\
 		  	</div>\
 		  </div>';
 
+var alertsuccessmine = '<div class="alert">\
+		  	<div class="alert alert-success" role="alert">\
+ 				<strong>Payed Up!</strong> Everyone has paid this bill fully.\
+		  	</div>\
+		  </div>';
+		  
 var alertnothing = '';
 
 var paybutton = '<a href="javascript:void(0)" onClick="PayCard('+ card.ID + 'popup' +')" class="btn btn-primary">Pay</a>';
@@ -141,8 +147,13 @@ var mypay = '';
 if(priority == 0){
 	myoutline = outlinesuccess;
 	mytext = textsuccess;
-	myalert = alertsuccess;
 	mypay = '';
+	if(card.myBill){
+	myalert = alertsuccessmine;
+		}
+	else{
+	myalert = alertsuccess;
+		}
 	}
 if(priority == 1){
 	myoutline = outlinenothing;
@@ -179,10 +190,9 @@ if(priority == 3){
 	mypay = paybutton;
 		}
 	}
-	
-	var newcontent = document.createElement(card.ID);
+	var newcontent = document.createElement(card.ID);	
     newcontent.innerHTML = '<div id="' + card.ID + '" class="container">\
-		<div  style="background:white"' + myoutline + '>\
+		<div onClick="goto(' + card.ID + ')" style="background:white"' + myoutline + '>\
 		  <date style="display:none">' + card.date +'</date>\
 		  <name style="display:none">' + card.name + '</name>\
 		  <category style="display:none">' + card.category + '</category>\
@@ -270,6 +280,7 @@ function create(card){
 		
 	    createCard(card);
 		createPopup(card, index);
+		localStorage.bills = JSON.stringify(billArray);
 	}
 
 function recreate(card){

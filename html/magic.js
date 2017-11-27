@@ -1,4 +1,7 @@
 $( document ).ready(function() {
+var user = JSON.parse(localStorage.user);
+
+document.getElementById('username').innerHTML = user.name;
 
 $('#clr').hide();
 
@@ -48,7 +51,7 @@ $( document ).ready(function() {
 	var alphBntClk = false;
 	var numBtnClk = false;
 	var catBtnClk = false;
-	var priorBtnClk = true;
+	var priorBtnClk = false;
 
 	$('#alphBnt').on('click', function () {	
 		if(!alphBntClk){	
@@ -101,10 +104,16 @@ $( document ).ready(function() {
 		billArray.reverse();
 		}
 		refreshCards();		
-		selected(alphBntClk,numBtnClk,catBtnClk,priorBtnClk, 3);
+		selected(alphBntClk,numBtnClk,catBtnClk,!priorBtnClk, 3);
 		priorBtnClk = !priorBtnClk;	
 	});
 });
+
+function generated(){
+	billArray.sort(dynamicSort("priority"));
+	billArray.reverse();
+	refreshCards();		
+	}
 
 function reorderCards(order) {
 
@@ -124,7 +133,7 @@ var duegoto = true;
 
 function HideCard(card) {
 	duegoto = false;
-	$(card).css("display", "none");
+	$(card.ID).css("display", "none");
 }
 
 
@@ -142,9 +151,10 @@ $( document ).ready(function() {
 	})
 });
 
-function goto(link){
-		if(duegoto){	
-		document.location.href = (link);
+function goto(id){
+		if(duegoto){
+		localStorage.viewedBill = JSON.stringify(id);
+		document.location.href = ("bill_view.html");
 		}
 		duegoto = true;
 	}
