@@ -1,3 +1,78 @@
+var templateCard = {
+	ID : null,
+	date : null,
+	name : null,
+	payee : null,
+	payers : null,
+	pay_mail : null,
+	pay_costs : null,
+	pay_paid : null,
+	priority : null,
+	ammount : null,
+	paid : null,
+	myBill : null,
+	category : null,
+	datestr : null,
+	description : null,
+	paypal : null,
+	transfer : null,
+	cash : null,
+	repeat : null
+}
+
+function findPayeeIndex(email_array, payee_email){
+	for(i = 0; i < email_array.length; i++){
+		if(payee_email == email_array[i]){
+			return i;
+		}
+	}
+}
+
+function findUserIndex(email_array, user_email){
+	for(i = 0; i < email_array.length; i++){
+		if(user_email == email_array[i]){
+			return i;
+		}
+	}
+}
+
+function cardConstructor(ID, name, due, payee_email, pay_names, pay_mail, pay_costs, pay_paid, category, description, paypal, transfer, cash, repeat) {
+	var user = JSON.parse(localStorage.user);
+
+	var payeeIndex = findPayeeIndex(pay_mail, payee_email);
+	var userIndex = findUserIndex(pay_mail, user.email);
+	
+	var newCard = templateCard;
+	newCard.ID = ID;
+	newCard.name = name;
+	newCard.date = parseInt(due);
+	newCard.payee = pay_names[payeeIndex];
+	
+	newCard.ammount = pay_costs[userIndex];
+	newCard.paid = pay_paid[userIndex];
+	newCard.myBill = (payeeIndex == userIndex);
+	
+	newCard.category = category;
+	newCard.description = description;
+	newCard.paypal = paypal;
+	newCard.transfer = transfer;
+	newCard.cash = cash;
+	newCard.repeat = repeat;
+
+	pay_names.splice(userIndex, 1);
+	pay_mail.splice(userIndex, 1);
+	pay_costs.splice(userIndex, 1);
+	pay_paid.splice(userIndex, 1);
+	
+
+	newCard.payers = pay_names;
+	newCard.pay_mail = pay_mail;
+	newCard.pay_costs = pay_costs;
+	newCard.pay_paid = pay_paid;
+	
+	return newCard;
+	}
+	
 Date.prototype.yyyymmdd = function() {
   var mm = this.getMonth() + 1; // getMonth() is zero-based
   var dd = this.getDate();
@@ -119,7 +194,7 @@ var alertdanger = '<div class="alert">\
 
 var alertdangermine = '<div class="alert">\
 		  	<div class="alert alert-danger" role="alert">\
- 				<strong>Bill Overdue!</strong> The bill is past due and not everyone has completed payment.\
+ 				<strong>Bill Overdue!</strong> The bill is past due and not everyone has payed you.\
 		  	</div>\
 		  </div>';
 		  
@@ -207,7 +282,7 @@ if(priority == 3){
 		  </div>\
 		  <div class="card-block">\
 		    <div class="card-title">\
-            <h4 style="float:right" class="' + mytext + '">' + card.ammount + '$' + '</h4>\
+            <h4 style="float:right" class="' + mytext + '">' + card.ammount.toFixed(2) + '$' + '</h4>\
             <h4>' + card.name + '</h4>\
             </div>\
 		    <p class="card-group">' + card.description + '</p>\
