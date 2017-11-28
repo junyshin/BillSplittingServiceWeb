@@ -117,7 +117,9 @@ $( document ).ready(function() {
 	create(card5);
 	
 	card6 = cardConstructor("card6", "Internet plan", "20171130", "suzanne.me@payme.com", ["George Giollo","Suzanne Pelletier","Jane Doe"], ["George_foreman@grills.com", "suzanne.me@payme.com", "jane.doe@mail.com"], [100.32, 200.25, 238.90], [false, true, false], "Service", "Unlimited Internet connection we all share", true, true, false, "monthly");
-	create(card6);
-	generated();
+		billArray.push(card6);
+		localStorage.bills = JSON.stringify(billArray);
+    
+    generated();
 });
 

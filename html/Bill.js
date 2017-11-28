@@ -1,3 +1,5 @@
+var billArray = [];
+
 var templateCard = {
 	ID : null,
 	date : null,
@@ -38,6 +40,7 @@ function findUserIndex(email_array, user_email){
 
 function cardConstructor(ID, name, due, payee_email, pay_names, pay_mail, pay_costs, pay_paid, category, description, paypal, transfer, cash, repeat) {
 	var user = JSON.parse(localStorage.user);
+	var bills = JSON.parse(localStorage.bills);
 
 	var payeeIndex = findPayeeIndex(pay_mail, payee_email);
 	var userIndex = findUserIndex(pay_mail, user.email);
@@ -83,26 +86,14 @@ Date.prototype.yyyymmdd = function() {
          ].join('');
 };
 
-var date = new Date();
-date.yyyymmdd();
-
-Date.prototype.yyyymmdd = function() {
-  var mm = this.getMonth() + 1; // getMonth() is zero-based
-  var dd = this.getDate();
-
-  return [this.getFullYear(),
-          (mm>9 ? '' : '0') + mm,
-          (dd>9 ? '' : '0') + dd
-         ].join('');
-};
 
 var date = new Date();
-date.yyyymmdd();
 var fortnightAway = new Date(+new Date + 12096e5);
-fortnightAway.yyyymmdd();
 
 function getpriority(card){
-	
+
+var date = new Date();
+var fortnightAway = new Date(+new Date + 12096e5);
 	var priority;
 	
 	if(fortnightAway.yyyymmdd() > card.date){
@@ -331,8 +322,6 @@ function createPopup(card, index){
 	
 	}
 
-var billArray = [];
-
 function closepopup(id) {
 	$(id).css("display", "none");
 };
@@ -362,4 +351,3 @@ function recreate(card){
 	    createCard(card);
 		createPopup(card, index);
 	}
-

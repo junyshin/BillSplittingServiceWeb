@@ -39,7 +39,7 @@ function checkDateField(field) {
 
 
 function arrayify(){
-	
+var user = JSON.parse(localStorage.user);
 var pay_names_new = [];
 var pay_mail_new = [];
 var pay_costs_new = [];
@@ -52,7 +52,7 @@ var incomplete = false;
 
 	pay_names_new[0] = user.name;
 	pay_mail_new[0] = user.email;
-	pay_costs_new[0] = youammount;
+	pay_costs_new[0] = youammount.value;
 	pay_paid_new[0] = true;
 	
 	var skipover = 0;
@@ -65,7 +65,7 @@ var incomplete = false;
 
 		
 		if(document.querySelector('[name="'+ entryName +'"]').value === "" || document.querySelector('[name="'+ entryMail +'"]').value === "" || document.querySelector('[name="'+ entryAmmount +'"]').value === ""){
-			alert('Entry number ' + (i + 1) + ' is incomplete and will be ignored');
+			//alert('Entry number ' + (i + 1) + ' is incomplete and will be ignored');
 			incomplete = true;
 			skipover++;
 			}
@@ -77,6 +77,7 @@ var incomplete = false;
 		pay_paid_new[i+1 - skipover] = entryPaid;
 			}
 		}
+
 	return [pay_names_new, pay_mail_new, pay_costs_new, pay_paid_new, incomplete];
 	}
 	
@@ -91,6 +92,14 @@ var pay_mail = new_pay[1];
 var pay_costs = new_pay[2];
 var pay_paid = new_pay[3];
 var incomplete = new_pay[4];
+
+var paypal = document.getElementById('paypal').checked;
+var transfer = document.getElementById('etransfer').checked;
+var cash = document.getElementById('cash').checked;
+
+var description = document.querySelector('[name="comment"]').value;
+var category = document.getElementById('inlineFormCustomSelect').value;
+var repeat = document.getElementById('inlineFormCustomSelect2').value;
 
 	var isname = false;
 	var isdate = false;
@@ -130,14 +139,19 @@ var incomplete = new_pay[4];
 	else{
 		ispayment = true
 		}
-		
+
+    
 	if(isname && isdate && isyouammount && ispayment){
 	
-	
-	
-	cardConstructor(newID, name, date, user.email, pay_names, pay_mail, pay_costs, pay_paid, category, description, paypal, transfer, cash, repeat);
-	document.location.href = ('Main_Page.html');
-	}
+    var user = JSON.parse(localStorage.user);
+    var createdCard = cardConstructor(newID, name, date, user.email, pay_names, pay_mail, pay_costs, pay_paid, category, description, paypal, transfer, cash, repeat);
+        
+
+		bills.push(createdCard);
+		localStorage.bills = JSON.stringify(bills);	
+        
+    document.location.href = ('Main_Page.html');
+    }
 }
 
 function question(){
