@@ -51,10 +51,6 @@ session_start();
           $exitvalue = 0;
           while ($row = mysqli_fetch_array($result, MYSQLI_NUM)) {
               if ($_POST['email'] == $row[0] && $_POST['password'] == $row[1]){
-                  $_SESSION['valid'] = true;
-                  $_SESSION['timeout'] = time();
-                  $_SESSION['email'] = $row[0];
-
                   $msg = 'You have entered valid email and password';
                   $exitvalue = 1;
                   header("Location: Main_Page.html");

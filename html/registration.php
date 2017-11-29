@@ -49,16 +49,37 @@ session_start();
           $password_reg = $_POST['password'];
           $firsname_reg = $_POST['firstname'];
           $lastname_reg = $_POST['lastname'];
+          $repassword_reg = $_POST['retypepassword'];
 
-          $sql = "INSERT INTO users (firstname, lastname, email, password)
-          VALUES ('$firsname_reg', '$lastname_reg', '$email_reg', '$password_reg')";
+          $result = mysqli_query($mysqli,"SELECT email, id FROM users");
 
-          if (mysqli_query($mysqli, $sql)) {
-              $msg = "New record created successfully";
-              header("Location: Main_Page.html");
-          } else {
-              $msg = "Error: " . $sql . "<br>" . mysqli_error($mysqli);
-              exit();
+          while ($row = mysqli_fetch_array($result, MYSQLI_NUM)) {
+              if ($_POST['email'] == $row[0]){
+                  $exitvalue = 0;
+                  break;
+              }else {
+                  $exitvalue = 1;
+              }
+          }
+
+          if ($exitvalue == 0){
+              $msg = "This email exist already. Please choose another";
+          }else {
+
+              if ($password_reg == $repassword_reg){
+                  $sql = "INSERT INTO users (firstname, lastname, email, password)
+                  VALUES ('$firsname_reg', '$lastname_reg', '$email_reg', '$password_reg')";
+
+                  if (mysqli_query($mysqli, $sql)) {
+                      $msg = "New record created successfully";
+                      header("Location: Main_Page.html");
+                  } else {
+                      $msg = "Error: " . $sql . "<br>" . mysqli_error($mysqli);
+                      exit();
+                  }
+              }else {
+                  $msg = $msg . "\nNot the same password. Please try again";
+              }
           }
       }
 
