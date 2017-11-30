@@ -108,9 +108,22 @@ var card5 = {
 	repeat : "one time"
 }
 
+function httpGet(theUrl)
+{
+    var xmlHttp = new XMLHttpRequest();
+    xmlHttp.open( "GET", theUrl, false ); // false for synchronous request
+    xmlHttp.setRequestHeader("Content-type", "application/json");
+    xmlHttp.send( null );
+    return xmlHttp.response;
+}
 
 $( document ).ready(function() {
-	create(card1);
+
+	var id = 2;
+	var cards = JSON.parse(httpGet("../assets/php/retrieve_bills.php?id="+id));
+	var card7 = cards[0];
+
+    create(card1);
 	create(card2);
 	create(card3);
 	create(card4);
