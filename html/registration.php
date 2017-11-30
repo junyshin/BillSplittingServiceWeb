@@ -97,7 +97,7 @@ session_start();
       <div class="collapse navbar-collapse" id="navbarCollapse">
         <ul class="navbar-nav mr-auto">
           <li class="nav-item active">
-            <a class="nav-link" href="loginPage.html">Main Page<span class="sr-only">(current)</span></a>
+            <a class="nav-link" href="loginPage.php">Main Page<span class="sr-only">(current)</span></a>
           </li>
         </ul>
       </div>

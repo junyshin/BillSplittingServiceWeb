@@ -60,7 +60,7 @@ session_start();
               }
           }
           if ($exitvalue == 0){
-              $msg = 'You have not entered a valid email and/or password';
+              $msg = 'You have not entered a invalid email and/or password';
           }
       }
 
