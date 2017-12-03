@@ -1,3 +1,6 @@
+<<<<<<< HEAD:html/loginPage.html
+<!DOCTYPE html>
+=======
 <?php
 ob_start();
 session_start();
@@ -8,6 +11,7 @@ session_start();
 // ini_set("display_errors", 1);
 ?>
 
+>>>>>>> master:html/loginPage.php
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -87,10 +91,24 @@ session_start();
             <p class = "form-signin-heading"><?php echo $msg; ?></p>
             <img id="profile-img" class="profile-img-card" src="../images/unknown-user.png" />
             <p id="profile-name" class="profile-name-card"></p>
+<<<<<<< HEAD:html/loginPage.html
+            <form class="form-signin">
+                <span id="reauth-email" class="reauth-email"></span>
+                <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
+                <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
+                <div id="remember" class="checkbox">
+                    <label>
+                        <input type="checkbox" value="remember-me" > Remember me
+                    </label>
+                </div>
+                <a href="Main_Page.html" type="btn">Sign In</a>
+                <!-- <button class="btn btn-lg btn-primary btn-block btn-signin" type="submit">Sign in</button> -->
+=======
             <form class="form-signin" role="form" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']);?>" method="post">
                 <input type="email" name="email" class="form-control" placeholder="Email address" required autofocus>
                 <input type="password" name="password" class="form-control" placeholder="Password" required>
                 <button class="btn btn-lg btn-primary btn-block btn-signin" type="submit" name="login">Sign in</button>
+>>>>>>> master:html/loginPage.php
             </form><!-- /form -->
             <a href="registration.php" class="forgot-password">
                 Create an account

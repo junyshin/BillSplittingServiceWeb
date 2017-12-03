@@ -9,6 +9,9 @@
 	<link rel="icon" href="../images/Iconsmind-Outline-ID-Card.ico" type="image/x-icon" />
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 	<script src="magic.js"></script>
+	<script src="Bill.js"></script>
+	<script src="BillGenerator.js"></script>
+	<script src="user.js"></script>
     <title>Dashboard</title>
 
     <!-- Bootstrap core CSS -->
@@ -25,7 +28,7 @@
       <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
-      <a class="navbar-brand" href="Main_Page.html">Jane Doe <img style="border-radius:50%;height:40px;width:40px;" src="../images/person_female1600.png"></a>
+      <a class="navbar-brand" href="Main_Page.html"><div id="username"></div></a>
       <div class="collapse navbar-collapse" id="navbarCollapse">
         <ul class="navbar-nav mr-auto">
           <li class="nav-item active">
@@ -75,249 +78,10 @@
     <button id="clr">Clear Search</button>
 </div>
 
+<div id="popup-container"></div>
 
-<div id="popup" style="position:fixed;width:50%; height:50%; left:25%; top:25%; background:grey; display:none; z-index:2">
-	<div style="position:absolute; width:90%; height:90%; left:5%; top:5%">
-	<h4 style="color:white;text-align:center;font-size:50px;">Appartment Rent</h4>
-    <a href="#" style="text-decoration:none; color:black; font-size:30px;position:absolute; right:10px; top:10px"><strong id="closeit">X</strong></a>
-    <br/><br/><br/>
-    <h3 style="color:white;float:left">Ammount Due: &nbsp;</h3>
-    <h3 style="color:red">500.00$</h3>
-    <br/><br/><br/>
-    <h3 style="color:white;">Pay using:</h3>
-    <button id="payit">Credit Card</button>
-    <button id="payit">Direct Deposit</button>
-    <button id="payit">Cash</button>
-	</div>
-</div>
+<div id="card-container" class="container"></div>
 
-<div id="card-container">
-
-    <div id="card1" class="container">
-		<div  style="background:white" class="card card-outline-danger">
-		  <date style="display:none">20171001</date>
-		  <name style="display:none">Grocery trip with Dave & Tim</name>
-		  <category style="display:none">Food</category>
-		  <priority style="display:none">3</priority>
-
-          <div class="card-header">
-		    <div style="float:right"><a style="text-decoration:none; color:black;" href="javascript:void(0)" onClick="HideCard(card1)"><strong>X</strong></a></div>
-            Food - Payable to Tim Thomas
-		  </div>
-		  <div class="card-block">
-		    <div class="card-title">
-            <h4 style="float:right" class="text-danger">29.94$</h4>
-            <h4>Grocery trip with Dave & Tim</h4>
-            </div>
-		    <p class="card-group">Bought food and drinks for housewarming supper with everyone. </p>
-            <a href="javascript:void(0)" onClick="PayCard(card1)" class="btn btn-primary">Pay</a>
-            <br></br>
-
-              <div class="card-footer text-muted">
-                Bill due: October 1st 2017
-              </div>
-		  </div>
-                    
-		  <div class="alert">
-		  	<div class="alert alert-danger" role="alert">
- 				<strong>Bill Overdue!</strong> The bill is past due and you have not completed payment.
-		  	</div>
-		  </div>
-		</div>
-	   <br/>
-    </div>
-
-    <div id="card2" class="container"  onClick="goto('Bill_template_02.html')">
-		<div id="appoutline" style="background:white" class="card card-outline-warning">
-		  <date style="display:none">20171101</date>
-		  <name style="display:none">Appartment Rent</name>
-		  <category style="display:none">Loging</category>
-		  <priority style="display:none">2</priority>
-
-		  <div class="card-header">
-		    <div style="float:right;"><a style="text-decoration:none; color:black;" href="javascript:void(0)" onClick="HideCard(card2)"><strong>X</strong></a></div>
-		    Loging - Payable to John Smith
-		  </div>
-		  <div class="card-block">
-		    <div class="card-title">
-            <h4 id="apptext" style="float:right" class="text-warning">500.00$</h4>
-            <h4>Appartment Rent</h4>
-            </div>
-		    <p class="card-group">Rent payment to John Smith for room at 123 Main Street.</p>
-            <button href="javascript:void(0)" onClick="PayCard(card2)" class="btn btn-primary">Pay</button>
-            <br></br>
-
-              <div class="card-footer text-muted">
-                Bill due: November 1st 2017 <br/>
-                Repeats: Monthly
-              </div>
-		  </div>
-              
-		  <div class="alert">
-		  	<div id="appalert" class="alert alert-warning" role="alert">
- 				<div id="warning"><strong>Due Soon!</strong> This bill is due in less than 2 weeks.</div>
- 				<div id="success" style="display:none"><strong>Payed Up!</strong> This bill is fully payed.</div>
-		  	</div>
-		  </div>
-		</div>
-    	<br/>	
-    </div>
-      
-    <div id="card3" class="container">
-		<div style="background:white" class="card">
-		  <date style="display:none">20171201</date>
-		  <name style="display:none">Car Lease</name>
-		  <category style="display:none">Transportation</category>
-		  <priority style="display:none">1</priority>
-
-		  <div class="card-header">
-		    <div style="float:right"><a style="text-decoration:none; color:black;" href="javascript:void(0)" onClick="HideCard(card3)"><strong>X</strong></a></div>
-		    Transportation - Payable to LeaseACarMTL
-		  </div>
-		  <div class="card-block">
-		    <div class="card-title">
-            <h4 style="float:right" class="text">427.00$</h4>
-            <h4>Car Lease</h4>
-            </div>
-		    <p class="card-group">Lease payment for a Honda Civic.</p>
-            <a href="javascript:void(0)" onClick="PayCard(card3)" class="btn btn-primary">Pay</a>
-            <br></br>
-
-              <div class="card-footer text-muted">
-                Bill due: December 1st 2017 <br/>
-                Repeats: Every 6 Months
-              </div>
-		  </div>
-       </div>
-	  <br/>    
-	</div>
-     
-     <div id="card4" class="container">
-		<div style="background:white" class="card">
-		  <date style="display:none">20171225</date>
-		  <name style="display:none">Drinks</name>
-		  <category style="display:none">Food</category>
-		  <priority style="display:none">1</priority>
-
-		  <div class="card-header">
-		    <div style="float:right"><a style="text-decoration:none; color:black;" href="javascript:void(0)" onClick="HideCard(card4)"><strong>X</strong></a></div>
-		    Food - Payable to Dave Davis
-		  </div>
-		  <div class="card-block">
-		    <div class="card-title">
-            <h4 style="float:right" class="text">20.26$</h4>
-            <h4>Drinks</h4>
-            </div>
-		    <p class="card-group">Pay back Tim for all the drinks he bought for Christmas supper.</p>
-            <a href="javascript:void(0)" onClick="PayCard(card4)" class="btn btn-primary">Pay</a>
-            <br></br>
-
-              <div class="card-footer text-muted">
-                Bill due: December 25th 2017 <br/>
-              </div>
-		  </div>
-       </div>
-    <br/>    
-	</div>
-    
-    <div id="card5" class="container" onClick="goto('Bill_template_01.html')">
-		<div style="background:white" class="card card-outline-warning">
-		  <date style="display:none">20171020</date>
-		  <name style="display:none">Water Park Trip</name>
-          <category style="display:none">Recreation</category>
-		  <priority style="display:none">2</priority>
-
-		  <div class="card-header">
-		    <div style="float:right"><a style="text-decoration:none; color:black;" href="javascript:void(0)" onClick="HideCard(card5)"><strong>X</strong></a></div>
-		    Recreation - (You are the recipient of this bill)
-		  </div>
-		  <div class="card-block">
-		    <div class="card-title">
-            <h4 style="float:right" class="text-warning">125.84$</h4>
-            <h4>Water Park Trip</h4>
-            </div>
-		    <p class="card-group">Money owed to Jane Doe for buying everyone's entrance to Val-Cartier water park.</p>
-			<br/>
-   			<h6 style="font-style:italic">Peter Lee has not yet paid!</h6>		 
-			<br/> 	
-              <div class="card-footer text-muted">
-                Bill due: October 20th 2017 <br/>
-              </div>
-              
-          	<div class="alert">
-		  	<div class="alert alert-warning" role="alert">
- 				<strong>Due Soon!</strong> This bill is due in 3 days and not everyone contributed fully.
-		  	</div>
-		  </div>
-		  </div>
-       </div>
-	  <br/>    
-	</div>
-       
-     <div id="card6" class="container">
-		<div style="background:white" class="card card-outline-success">
-		  <date style="display:none">20170901</date>
-		  <name style="display:none">Kitchen Set</name>
-		  <category style="display:none">Loging</category>
-		  <priority style="display:none">0</priority>
-
-		  <div class="card-header">
-		    <div style="float:right"><a style="text-decoration:none; color:black;" href="javascript:void(0)" onClick="HideCard(card6)"><strong>X</strong></a></div>
-		    Loging - Payable to John Smith
-		  </div>
-		  <div class="card-block">
-		    <div class="card-title">
-            <h4 style="float:right" class="text-success">32.92$</h4>
-            <h4>Kitchen Set</h4>
-            </div>
-		    <p class="card-group">Contribute to payment for the new dinning furniture set.</p>
-              <div class="card-footer text-muted">
-                Bill due: October 1st 2017 <br/>
-              </div>
-		  </div>
-              
-		  <div class="alert">
-		  	<div class="alert alert-success" role="alert">
- 				<strong>Payed Up!</strong> This bill is fully payed.
-		  	</div>
-		  </div>
-		</div>
-	  <br/>
-	</div>
-        
-    <div id="card7" class="container">
-		<div style="background:white" class="card card-outline-success">
-		  <date style="display:none">20171101</date>
-		  <name style="display:none">Internet Bill</name>
-		  <category style="display:none">Utility</category>
-		  <priority style="display:none">0</priority>
-
-		  <div class="card-header">
-		    <div style="float:right"><a style="text-decoration:none; color:black;" href="javascript:void(0)" onClick="HideCard(card7)"><strong>X</strong></a></div>
-		    Utility - (You are the recipient of this bill)
-		  </div>
-		  <div class="card-block">
-		    <div class="card-title">
-            <h4 style="float:right" class="text-success">78.12$</h4>
-            <h4>Internet Bill</h4>
-            </div>
-		    <p class="card-group">Payment to Jane Doe for letting the other flatmates use her internet access.</p>
-
-              <div class="card-footer text-muted">
-                Bill due: November 1st 2017 <br/>
-                Repeats: Monthly
-              </div>
-		  </div>
-              
-		  <div class="alert">
-		  	<div class="alert alert-success" role="alert">
- 				<strong>Payed Up!</strong> This bill is fully payed.
-		  	</div>
-		  </div>
-		</div>
-       <br/>
-	</div> 
-</div>
   <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
