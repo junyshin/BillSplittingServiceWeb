@@ -1,7 +1,8 @@
 $( document ).ready(function() {
-var selectedBill = JSON.parse(localStorage.viewedBill);
-var user = JSON.parse(localStorage.user);
-var bills = JSON.parse(localStorage.bills);
+    var user;
+    var selectedBill;
+    selectedBill = JSON.parse(localStorage.viewedBill);
+    user = JSON.parse(localStorage.user);
 
 document.getElementById('username2').innerHTML = user.name;
 document.getElementById('email').innerHTML = user.email;

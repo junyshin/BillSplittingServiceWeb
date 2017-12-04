@@ -151,9 +151,9 @@ $( document ).ready(function() {
 	})
 });
 
-function goto(id){
+function goto($scope){
 		if(duegoto){
-		localStorage.viewedBill = JSON.stringify(id);
+		localStorage.viewedBill = JSON.stringify($scope.id);
 		document.location.href = ("bill_view.html");
 		}
 		duegoto = true;

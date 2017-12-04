@@ -40,13 +40,14 @@ function findUserIndex(email_array, user_email){
 
 function cardConstructor(ID, name, due, payee_email, pay_names, pay_mail, pay_costs, pay_paid, category, description, paypal, transfer, cash, repeat) {
 	var user = JSON.parse(localStorage.user);
-	var bills = JSON.parse(localStorage.bills);
 
 	var payeeIndex = findPayeeIndex(pay_mail, payee_email);
 	var userIndex = findUserIndex(pay_mail, user.email);
 	
 	var newCard = templateCard;
-	newCard.ID = ID;
+
+    var newId = ID.replace(/bill/i, 'card');
+	newCard.ID = newId;
 	newCard.name = name;
 	newCard.date = parseInt(due);
 	newCard.payee = pay_names[payeeIndex];
@@ -256,7 +257,7 @@ if(priority == 3){
 	mypay = paybutton;
 		}
 	}
-	var newcontent = document.createElement(card.ID);	
+	var newcontent = document.createElement(card.ID);
     newcontent.innerHTML = '<div id="' + card.ID + '" class="container">\
 		<div onClick="goto(' + card.ID + ')" style="background:white"' + myoutline + '>\
 		  <date style="display:none">' + card.date +'</date>\

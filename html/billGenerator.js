@@ -1,24 +1,27 @@
-var card1 = {
-	ID : 'card1',
-	date : 20171202,
-	name : "Grocery trip with Dave & Tim",
-	payee : "John Doe",
-	payers : ["George", "John", "Paul"],
-	pay_mail : ["george@gmail.com","john.johny@mymail.ca","paul78@mailmonster.com"],
-	pay_costs : [100.32, 200.20, 43.28],
-	pay_paid : [true, true, false, true],
-	priority : null,
-	ammount : 381.13,
-	paid : false,
-	myBill : false,
-	category : "Food",
-	datestr : null,
-	description : "Owe money to Dave for that grocery trip",
-	paypal : true,
-	transfer : true,
-	cash : true,
-	repeat : "one time"
-}
+// var card1 = {
+// 	ID : 'card1',
+// 	date : 20171202,
+// 	name : "Grocery trip with Dave & Tim",
+// 	payee : "John Doe",
+// 	payers : ["George", "John", "Paul"],
+// 	pay_mail : ["george@gmail.com","john.johny@mymail.ca","paul78@mailmonster.com"],
+// 	pay_costs : [100.32, 200.20, 43.28],
+// 	pay_paid : [true, true, false, true],
+// 	priority : null,
+// 	ammount : 381.13,
+// 	paid : false,
+// 	myBill : false,
+// 	category : "Food",
+// 	datestr : null,
+// 	description : "Owe money to Dave for that grocery trip",
+// 	paypal : true,
+// 	transfer : true,
+// 	cash : true,
+// 	repeat : "one time"
+// }
+
+var card1 = null;
+
 
 var card2 = {
 	ID : 'card2',
@@ -117,21 +120,42 @@ function httpGet(theUrl)
     return xmlHttp.response;
 }
 
+
+function commaToArray(commaString){
+    var initialString = commaString;
+    return dataArray = initialString .split(",");
+}
+
+
 $( document ).ready(function() {
 
-	var id = 2;
+	var id = 'card1';
 	var cards = JSON.parse(httpGet("../assets/php/retrieve_bills.php?id="+id));
+	for(i = 0; i < cards.length; i++){
+        var id = 'card' + (i + 1).toString();
+
+
+		window[id]
+    }
+
+
+
+
+
+
 	var card7 = cards[0];
 
-    create(card1);
-	create(card2);
-	create(card3);
-	create(card4);
-	create(card5);
-	
-	card6 = cardConstructor("card6", "Internet plan", "20171130", "suzanne.me@payme.com", ["George Giollo","Suzanne Pelletier","Jane Doe"], ["George_foreman@grills.com", "suzanne.me@payme.com", "jane.doe@mail.com"], [100.32, 200.25, 238.90], [false, true, false], "Service", "Unlimited Internet connection we all share", true, true, false, "monthly");
-		billArray.push(card6);
-		localStorage.bills = JSON.stringify(billArray);
+    // create(card1);
+	// create(card2);
+	// create(card3);
+	// create(card4);
+	// create(card5);
+    //card6 = cardConstructor("card6", "Internet plan", "20171130", "suzanne.me@payme.com", ["George Giollo","Suzanne Pelletier","Jane Doe"], ["George_foreman@grills.com", "suzanne.me@payme.com", "jane.doe@mail.com"], [100.32, 200.25, 238.90], [false, true, false], "Service", "Unlimited Internet connection we all share", true, true, false, "monthly");
+
+    card1 = cardConstructor(card7.id, card7.name, card7.due, "suzanne.me@payme.com", ["George Giollo","Suzanne Pelletier","Jane Doe"], ["George_foreman@grills.com", "suzanne.me@payme.com", "jane.doe@mail.com"], [100.32, 200.25, 238.90], [false, true, false], card7.category, card7.description, true, true, false, card7.repeat);
+
+
+	localStorage.bills = JSON.stringify(billArray);
     
     generated();
 });
