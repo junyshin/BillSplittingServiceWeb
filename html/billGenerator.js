@@ -120,29 +120,10 @@ function httpGet(theUrl)
     return xmlHttp.response;
 }
 
-
-function commaToArray(commaString){
-    var initialString = commaString;
-    return dataArray = initialString .split(",");
-}
-
-
 $( document ).ready(function() {
 
 	var id = 'card1';
 	var cards = JSON.parse(httpGet("../assets/php/retrieve_bills.php?id="+id));
-	for(i = 0; i < cards.length; i++){
-        var id = 'card' + (i + 1).toString();
-
-
-		window[id]
-    }
-
-
-
-
-
-
 	var card7 = cards[0];
 
     // create(card1);
@@ -152,11 +133,9 @@ $( document ).ready(function() {
 	// create(card5);
     //card6 = cardConstructor("card6", "Internet plan", "20171130", "suzanne.me@payme.com", ["George Giollo","Suzanne Pelletier","Jane Doe"], ["George_foreman@grills.com", "suzanne.me@payme.com", "jane.doe@mail.com"], [100.32, 200.25, 238.90], [false, true, false], "Service", "Unlimited Internet connection we all share", true, true, false, "monthly");
 
-    card1 = cardConstructor(card7.id, card7.name, card7.due, "suzanne.me@payme.com", ["George Giollo","Suzanne Pelletier","Jane Doe"], ["George_foreman@grills.com", "suzanne.me@payme.com", "jane.doe@mail.com"], [100.32, 200.25, 238.90], [false, true, false], card7.category, card7.description, true, true, false, card7.repeat);
-
-
-	localStorage.bills = JSON.stringify(billArray);
-    
+    card1 = cardConstructor(card7.id, card7.name, card7.due, card7.payeemail, ["George Giollo","Suzanne Pelletier","Jane Doe"], ["George_foreman@grills.com", "suzanne.me@payme.com", "jane.doe@mail.com"], [100.32, 200.25, 238.90], [false, true, false], card7.category, card7.description, true, true, false, card7.repeat);
+	billArray.push(card1);
+    localStorage.bills = JSON.stringify(billArray);
     generated();
 });
 
