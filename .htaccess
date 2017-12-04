@@ -1,4 +1,4 @@
 AuthType Basic
 AuthName "HCI Project access restricted"
-AuthUserFile /home/jshin22/www/HCIWebPage/webpasswords/.htpasswd
+AuthUserFile /home/2016/mngong/public_html/BillSplittingServiceWeb/webpasswords/.htpasswd
 require valid-user
