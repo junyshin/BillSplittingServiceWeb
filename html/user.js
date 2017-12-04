@@ -1,10 +1,10 @@
 $( document ).ready(function() {
-var user = {
-	ID : 'userID',
-	name : "Jane Doe",
-	email : "jane.doe@mail.com",
-}
+	var user = {
+		ID : userId,
+		name : userName,
+		email : userEmail,
+	}
 
-localStorage.user = JSON.stringify(user);
+	localStorage.user = JSON.stringify(user);
 
 });

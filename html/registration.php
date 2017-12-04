@@ -16,7 +16,7 @@ session_start();
     <meta name="author" content="">
   <link rel="icon" href="../images/Iconsmind-Outline-ID-Card.ico" type="image/x-icon" />
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-  <script src="magic.js"></script>
+  <script src="user.js"></script>
   <title>Login Page</title>
 
   <link rel="stylesheet" type="text/css" href="../assets/css/login.css">
@@ -26,7 +26,6 @@ session_start();
   </head>
 
   <body style="background:#CCC">
-  <div class = "container">
       <?php
 
       $localhost = "mydatabill.chohqvcgbmpc.us-east-2.rds.amazonaws.com";
@@ -72,7 +71,15 @@ session_start();
 
                   if (mysqli_query($mysqli, $sql)) {
                       $msg = "New record created successfully";
-                      header("Location: Main_Page.html");
+
+                      $result = mysqli_query($mysqli,"SELECT email, id FROM users");
+                      while ($row = mysqli_fetch_array($result, MYSQLI_NUM)) {
+                          if ($email_reg == $row[0]){
+                              $userId = $row[1];
+                              $exitvalue = 1;
+                              break;
+                          }
+                      }
                   } else {
                       $msg = "Error: " . $sql . "<br>" . mysqli_error($mysqli);
                       exit();
@@ -80,12 +87,20 @@ session_start();
               }else {
                   $msg = $msg . "\nNot the same password. Please try again";
               }
+
           }
       }
 
       mysqli_close($mysqli);
       ?>
-  </div> <!-- /container -->
+
+  <script type="text/javascript">
+      var userEmail = "<?php echo $email_reg; ?>";
+      var userName = "<?php echo $firsname_reg . " " . $lastname_reg; ?>";
+      var userId = <?php echo $userId; ?>;
+      var jumpToo = <?php echo $exitvalue; ?>;
+      if (jumpToo == 1) window.location.href = 'Main_Page.html';
+  </script>
 
 
     <nav class="navbar navbar-toggleable-md navbar-inverse fixed-top bg-inverse">

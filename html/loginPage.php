@@ -1,6 +1,3 @@
-<<<<<<< HEAD:html/loginPage.html
-<!DOCTYPE html>
-=======
 <?php
 ob_start();
 session_start();
@@ -11,7 +8,50 @@ session_start();
 // ini_set("display_errors", 1);
 ?>
 
->>>>>>> master:html/loginPage.php
+<?php
+
+$localhost = "mydatabill.chohqvcgbmpc.us-east-2.rds.amazonaws.com";
+$mysql_user = "hcibillteam";
+$mysql_password = "Elgordo21";
+$mydb = "billdata";
+
+$mysqli = mysqli_connect($localhost, $mysql_user, $mysql_password, $mydb);
+
+/* check connection */
+if (mysqli_connect_errno()) {
+    printf("Connect failed: %s\n", mysqli_connect_error());
+    exit();
+}
+
+$result = mysqli_query($mysqli,"SELECT email, password, firstname, lastname, id FROM users");
+
+$msg = '';
+
+if (isset($_POST['login']) && !empty($_POST['email']) && !empty($_POST['password'])){
+    $exitvalue = 0;
+    while ($row = mysqli_fetch_array($result, MYSQLI_NUM)) {
+        if ($_POST['email'] == $row[0] && $_POST['password'] == $row[1]){
+            $msg = 'You have entered valid email and password';
+            $exitvalue = 1;
+            $userEmail = $row[0];
+            $userName = $row[2] . " " . $row[3];
+            $userId = $row[4];
+            break;
+        }else {
+            $exitvalue = 0;
+        }
+    }
+    if ($exitvalue == 0){
+        $msg = 'You have not entered a invalid email and/or password';
+    }
+//    else {
+//        header("Location: Main_Page.html");
+//        exit();
+//    }
+}
+mysqli_close($conn);
+?>
+
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -20,7 +60,8 @@ session_start();
     <meta name="author" content="">
   <link rel="icon" href="../images/Iconsmind-Outline-ID-Card.ico" type="image/x-icon" />
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-  <script src="magic.js"></script>
+<!--  <script src="magic.js"></script>-->
+  <script src="user.js"></script>
   <title>Login Page</title>
 
   <link rel="stylesheet" type="text/css" href="../assets/css/login.css">
@@ -31,46 +72,13 @@ session_start();
 
   <body style="background:#CCC">
 
-  <div class = "container">
-      <?php
-
-      $localhost = "mydatabill.chohqvcgbmpc.us-east-2.rds.amazonaws.com";
-      $mysql_user = "hcibillteam";
-      $mysql_password = "Elgordo21";
-      $mydb = "billdata";
-
-      $mysqli = mysqli_connect($localhost, $mysql_user, $mysql_password, $mydb);
-
-      /* check connection */
-      if (mysqli_connect_errno()) {
-          printf("Connect failed: %s\n", mysqli_connect_error());
-          exit();
-      }
-
-      $result = mysqli_query($mysqli,"SELECT email, password FROM users");
-
-      $msg = '';
-
-      if (isset($_POST['login']) && !empty($_POST['email']) && !empty($_POST['password'])){
-          $exitvalue = 0;
-          while ($row = mysqli_fetch_array($result, MYSQLI_NUM)) {
-              if ($_POST['email'] == $row[0] && $_POST['password'] == $row[1]){
-                  $msg = 'You have entered valid email and password';
-                  $exitvalue = 1;
-                  header("Location: Main_Page.html");
-                  break;
-              }else {
-                  $exitvalue = 0;
-              }
-          }
-          if ($exitvalue == 0){
-              $msg = 'You have not entered a invalid email and/or password';
-          }
-      }
-
-      mysqli_close($conn);
-      ?>
-  </div> <!-- /container -->
+  <script type="text/javascript">
+      var userEmail = "<?php echo $userEmail; ?>";
+      var userName = "<?php echo $userName; ?>";
+      var userId = <?php echo $userId; ?>;
+      var jumpToo = <?php echo $exitvalue; ?>;
+      if (jumpToo == 1) window.location.href = 'Main_Page.html';
+  </script>
 
     <nav class="navbar navbar-toggleable-md navbar-inverse fixed-top bg-inverse">
       <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
@@ -91,24 +99,10 @@ session_start();
             <p class = "form-signin-heading"><?php echo $msg; ?></p>
             <img id="profile-img" class="profile-img-card" src="../images/unknown-user.png" />
             <p id="profile-name" class="profile-name-card"></p>
-<<<<<<< HEAD:html/loginPage.html
-            <form class="form-signin">
-                <span id="reauth-email" class="reauth-email"></span>
-                <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
-                <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
-                <div id="remember" class="checkbox">
-                    <label>
-                        <input type="checkbox" value="remember-me" > Remember me
-                    </label>
-                </div>
-                <a href="Main_Page.html" type="btn">Sign In</a>
-                <!-- <button class="btn btn-lg btn-primary btn-block btn-signin" type="submit">Sign in</button> -->
-=======
             <form class="form-signin" role="form" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']);?>" method="post">
                 <input type="email" name="email" class="form-control" placeholder="Email address" required autofocus>
                 <input type="password" name="password" class="form-control" placeholder="Password" required>
                 <button class="btn btn-lg btn-primary btn-block btn-signin" type="submit" name="login">Sign in</button>
->>>>>>> master:html/loginPage.php
             </form><!-- /form -->
             <a href="registration.php" class="forgot-password">
                 Create an account
