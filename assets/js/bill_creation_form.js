@@ -84,7 +84,11 @@ var incomplete = false;
 function validate(){
 	
 var bills = JSON.parse(localStorage.bills);
-var newID = 'card' + (bills.length + 11).toString();
+
+var random = Math.random();
+var random = random * 100000000000000000;
+
+var newID = 'card' + (random).toString();
 var new_pay = arrayify();
 
 var pay_names = new_pay[0];
