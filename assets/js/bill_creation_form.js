@@ -84,7 +84,9 @@ var incomplete = false;
 function validate(){
 	
 var bills = JSON.parse(localStorage.bills);
-var newID = 'card' + (bills.length + 11).toString();
+var topBillID = foo.replace('card', '');
+var topIDInt = parseInt(topBillID);
+var newID = 'card' + (topIDInt + 1).toString();
 var new_pay = arrayify();
 
 var pay_names = new_pay[0];
