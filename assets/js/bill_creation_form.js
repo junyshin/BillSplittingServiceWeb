@@ -53,7 +53,7 @@ var incomplete = false;
 	pay_names_new[0] = user.name;
 	pay_mail_new[0] = user.email;
 	pay_costs_new[0] = youammount.value;
-	pay_paid_new[0] = true;
+	pay_paid_new[0] = false;
 	
 	var skipover = 0;
 	
@@ -84,7 +84,7 @@ var incomplete = false;
 function validate(){
 	
 var bills = JSON.parse(localStorage.bills);
-var newID = 'card' + (bills.length + 1).toString();
+var newID = 'card' + (bills.length + 11).toString();
 var new_pay = arrayify();
 
 var pay_names = new_pay[0];
@@ -144,13 +144,16 @@ var repeat = document.getElementById('inlineFormCustomSelect2').value;
 	if(isname && isdate && isyouammount && ispayment){
 	
     var user = JSON.parse(localStorage.user);
+    var createdCard = null;
     var createdCard = cardConstructor(newID, name, date, user.email, pay_names, pay_mail, pay_costs, pay_paid, category, description, paypal, transfer, cash, repeat);
-    //var url = "../php/add_bill.php?id="+newID+"&name="+name+"&date="+date+"&payee="+user.email+"&names="+pay_names.toString()+"&mails="+pay_mail.toString()+"&costs="+pay_costs.toString()+"&paid="+pay_paid.map(Number).toString()+"&cat="+category+"&desc="+description+"&paypal="+Number(paypal)+"&transfer="+Number(transfer)+"&cash="+Number(cash)+"&repeat="+repeat;
-    //var success = httpGet(url);
+    var billArray = JSON.parse(localStorage.bills);
+    billArray.push(createdCard);
+    localStorage.bills = JSON.stringify(billArray);
 
-    bills.push(createdCard);
-    localStorage.bills = JSON.stringify(bills);
-        
+    var url = "../assets/php/add_bill.php?id="+newID+"&name="+name+"&date="+date+"&payee="+user.email+"&names="+pay_names.toString()+"&mails="+pay_mail.toString()+"&costs="+pay_costs.toString()+"&paid="+pay_paid.map(Number).toString()+"&cat="+category+"&desc="+description+"&paypal="+Number(paypal)+"&transfer="+Number(transfer)+"&cash="+Number(cash)+"&repeat="+repeat;
+    var success = httpGet(url);
+
+
     document.location.href = ('Main_Page.html');
     }
 }

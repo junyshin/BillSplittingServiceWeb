@@ -10,8 +10,9 @@ $( document ).ready(function() {
 	var indexfound = IDArray.indexOf(searchString);
 	var selectedBill = billArray[indexfound];
     user = JSON.parse(localStorage.user);
+    getdate(selectedBill);
 
-document.getElementById('username2').innerHTML = user.name;
+    document.getElementById('username2').innerHTML = user.name;
 document.getElementById('email').innerHTML = user.email;
 document.getElementById('pageTitle').innerHTML = selectedBill.name;
 document.getElementById('name').innerHTML = selectedBill.name;
@@ -60,38 +61,44 @@ document.getElementById('cash').innerHTML = "&#10008";
 	}
 
 
-for(index = 2; index < selectedBill.payers.length + 2; index++){
-var checked = null;
-var paid = null;
+for(index = 2; index < selectedBill.payers.length + 2; index++) {
+    var checked = null;
+    var paid = null;
 
-if(selectedBill.pay_paid[index-2]){
-	checked = "&#10004";
-	paid = 'style="color:green"';
-	}
-else{
-	checked = "&#10008"
-	paid = 'style="color:red"';
-	}
-	
-var newPayer = document.createElement("tr");
-newPayer.innerHTML	=	'<tr id=' + '1' + '>\
+    if (selectedBill.pay_paid[index - 2]) {
+        checked = "&#10004";
+        paid = 'style="color:green"';
+    }
+    else {
+        checked = "&#10008"
+        paid = 'style="color:red"';
+    }
+
+    var user = JSON.parse(localStorage.user);
+
+    if (selectedBill.pay_mail[index - 2] == (user.email)) {
+    }
+    else {
+        var newPayer = document.createElement("tr");
+        newPayer.innerHTML = '<tr id=' + '1' + '>\
                 <td class="text-center">\
-                  '+ index +'\
+                  ' + (index - 2) + '\
                 </td>\
                 <td class="text-center">\
-                  <h4>'+ selectedBill.payers[index-2] +'</h4>\
+                  <h4>' + selectedBill.payers[index - 2] + '</h4>\
                 </td>\
                 <td class="text-center">\
-                  <h4>'+ selectedBill.pay_mail[index-2] +'</h4>\
+                  <h4>' + selectedBill.pay_mail[index - 2] + '</h4>\
                 </td>\
-                <td '+ paid +' class="text-center">\
-                  <h4>'+ selectedBill.pay_costs[index-2].toFixed(2) +'</h4>\
+                <td ' + paid + ' class="text-center">\
+                  <h4>' + selectedBill.pay_costs[index - 2].toFixed(2) + '</h4>\
                 </td>\
                 <td class="text-center" id="paid">\
-				'+ checked +'\
+				' + checked + '\
                 </td>\
               </tr>'
-	document.getElementById('payers').appendChild(newPayer);
+        document.getElementById('payers').appendChild(newPayer);
+    }
 }
 });
 

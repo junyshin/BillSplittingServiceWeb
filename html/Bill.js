@@ -14,7 +14,7 @@ function findUserIndex(email_array, user_email){
 	}
 }
 
-function cardConstructor(index, ID, name, due, payee_email, pay_names, pay_mail, pay_costs, pay_paid, category, description, paypal, transfer, cash, repeat) {
+function cardConstructor(ID, name, due, payee_email, pay_names, pay_mail, pay_costs, pay_paid, category, description, paypal, transfer, cash, repeat) {
 	var user = JSON.parse(localStorage.user);
 
 	var payeeIndex = findPayeeIndex(pay_mail, payee_email);
@@ -39,8 +39,11 @@ function cardConstructor(index, ID, name, due, payee_email, pay_names, pay_mail,
         paypal : null,
         transfer : null,
         cash : null,
-        repeat : null
+        repeat : null,
+		userIndex : null
     };
+
+	newCard.userIndex = userIndex;
 
     var newId = ID.replace(/bill/i, 'card');
 	newCard.ID = newId;
@@ -59,18 +62,12 @@ function cardConstructor(index, ID, name, due, payee_email, pay_names, pay_mail,
 	newCard.cash = cash;
 	newCard.repeat = repeat;
 
-	pay_names.splice(userIndex, 1);
-	pay_mail.splice(userIndex, 1);
-	pay_costs.splice(userIndex, 1);
-	pay_paid.splice(userIndex, 1);
-	
-
 	newCard.payers = pay_names;
 	newCard.pay_mail = pay_mail;
 	newCard.pay_costs = pay_costs;
 	newCard.pay_paid = pay_paid;
 	
-	billArray[index] = newCard;
+	return newCard;
 	}
 	
 Date.prototype.yyyymmdd = function() {
@@ -335,6 +332,11 @@ function PayCard(id) {
 function payPopup(id, index) {
 	billArray[index].paid = true;
 
+	billArray[index].pay_paid[billArray[index].userIndex] = 1;
+
+
+    var url2 = "../assets/php/update_bill.php?id="+billArray[index].ID+"&paid="+billArray[index].pay_paid.map(Number).toString();
+    var success2 = httpGet(url2);
 	$(id).css("display", "none");
 	refreshCards()
 }

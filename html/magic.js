@@ -220,3 +220,12 @@ function refreshCards() {
 		recreate(billArray[index]);		
 		}
 }
+
+function httpGet(theUrl)
+{
+    var xmlHttp = new XMLHttpRequest();
+    xmlHttp.open( "GET", theUrl, false ); // false for synchronous request
+    xmlHttp.setRequestHeader("Content-type", "application/json");
+    xmlHttp.send( null );
+    return xmlHttp.response;
+}
