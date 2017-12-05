@@ -1,9 +1,17 @@
+// $(document).onload(function() {
+//
+// 	alert("locked and loaded");
+// });
+
 $( document ).ready(function() {
 var user = JSON.parse(localStorage.user);
 
 document.getElementById('username').innerHTML = user.name;
 
 $('#clr').hide();
+
+
+
 
 $("#search-criteria").keyup(function(event){
     if(event.keyCode == 13){
