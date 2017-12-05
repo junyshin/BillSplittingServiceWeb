@@ -145,10 +145,11 @@ var repeat = document.getElementById('inlineFormCustomSelect2').value;
 	
     var user = JSON.parse(localStorage.user);
     var createdCard = cardConstructor(newID, name, date, user.email, pay_names, pay_mail, pay_costs, pay_paid, category, description, paypal, transfer, cash, repeat);
-        
+    //var url = "../php/add_bill.php?id="+newID+"&name="+name+"&date="+date+"&payee="+user.email+"&names="+pay_names.toString()+"&mails="+pay_mail.toString()+"&costs="+pay_costs.toString()+"&paid="+pay_paid.map(Number).toString()+"&cat="+category+"&desc="+description+"&paypal="+Number(paypal)+"&transfer="+Number(transfer)+"&cash="+Number(cash)+"&repeat="+repeat;
+    //var success = httpGet(url);
 
-		bills.push(createdCard);
-		localStorage.bills = JSON.stringify(bills);	
+    bills.push(createdCard);
+    localStorage.bills = JSON.stringify(bills);
         
     document.location.href = ('Main_Page.html');
     }

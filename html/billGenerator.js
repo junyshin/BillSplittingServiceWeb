@@ -93,7 +93,7 @@ var card5 = {
 	ID : 'card5',
 	date : 20160718,
 	name : "Bottle service at da club",
-	payee : "John Doe",
+	payee : "john.johny@mymail.ca",
 	payers : ["George", "John", "Paul"],
 	pay_mail : ["george@gmail.com","john.johny@mymail.ca","paul78@mailmonster.com"],
 	pay_costs : [100.32, 200.20, 43.28],
@@ -122,18 +122,17 @@ function httpGet(theUrl)
 
 $( document ).ready(function() {
 
-	var id = 'card1';
-	var cards = JSON.parse(httpGet("../assets/php/retrieve_bills.php?id="+id));
+	var id = JSON.parse(localStorage.user).email;
+	var cards = JSON.parse(httpGet("../assets/php/retrieve_bills.php?user="+id));
 	var card7 = cards[0];
 
-    // create(card1);
-	// create(card2);
-	// create(card3);
-	// create(card4);
-	// create(card5);
-    //card6 = cardConstructor("card6", "Internet plan", "20171130", "suzanne.me@payme.com", ["George Giollo","Suzanne Pelletier","Jane Doe"], ["George_foreman@grills.com", "suzanne.me@payme.com", "jane.doe@mail.com"], [100.32, 200.25, 238.90], [false, true, false], "Service", "Unlimited Internet connection we all share", true, true, false, "monthly");
+    var url = "../assets/php/add_bill.php?id="+card5.ID+"&name="+card5.name+"&date="+card5.date+"&payee="+card5.payee+"&names="+card5.payers.toString()+"&mails="+card5.pay_mail.toString()+"&costs="+card5.pay_costs.toString()+"&paid="+card5.pay_paid.map(Number).toString()+"&cat="+card5.category+"&desc="+card5.description+"&paypal="+Number(card5.paypal)+"&transfer="+Number(card5.transfer)+"&cash="+Number(card5.cash)+"&repeat="+card5.repeat;
+    var success = httpGet(url);
 
-    card1 = cardConstructor(card7.id, card7.name, card7.due, card7.payeemail, ["George Giollo","Suzanne Pelletier","Jane Doe"], ["George_foreman@grills.com", "suzanne.me@payme.com", "jane.doe@mail.com"], [100.32, 200.25, 238.90], [false, true, false], card7.category, card7.description, true, true, false, card7.repeat);
+    var url2 = "../assets/php/update_bill.php?id="+card5.ID+"&name="+card2.name+"&date="+card5.date+"&payee="+card5.payee+"&names="+card5.payers.toString()+"&mails="+card5.pay_mail.toString()+"&costs="+card5.pay_costs.toString()+"&paid="+card5.pay_paid.map(Number).toString()+"&cat="+card5.category+"&desc="+card5.description+"&paypal="+Number(card5.paypal)+"&transfer="+Number(card5.transfer)+"&cash="+Number(card5.cash)+"&repeat="+card5.repeat;
+    var success2 = httpGet(url2);
+
+    card1 = cardConstructor(card7.id, card7.name, card7.due, card7.payeemail, card7.paynames.split(','), card7.paymail.split(','), card7.paycost.split(',').map(Number), card7.paypaid.split(',').map(Number), card7.category, card7.description, Number(card7.paypal), Number(card7.transfer), Number(card7.cash), card7.repeat);
 	billArray.push(card1);
     localStorage.bills = JSON.stringify(billArray);
     generated();
