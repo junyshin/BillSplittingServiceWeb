@@ -5,6 +5,9 @@ document.getElementById('username').innerHTML = user.name;
 
 $('#clr').hide();
 
+
+
+
 $("#search-criteria").keyup(function(event){
     if(event.keyCode == 13){
         $("#search").click();
@@ -112,8 +115,8 @@ $( document ).ready(function() {
 function generated(){
 	billArray.sort(dynamicSort("priority"));
 	billArray.reverse();
-	refreshCards();		
-	}
+	refreshCards();
+}
 
 function reorderCards(order) {
 
@@ -133,7 +136,16 @@ var duegoto = true;
 
 function HideCard(card) {
 	duegoto = false;
-	$(card.ID).css("display", "none");
+    var billArray = JSON.parse(localStorage.bills);
+    var index = JSON.parse(localStorage.selectedBill);
+    var searchString = "card" + index.toString();
+    var IDArray = [];
+    for(var i = 0; i <billArray.length; i++){
+        IDArray[i] = billArray[i].ID;
+    }
+    var indexfound = IDArray.indexOf(searchString);
+    var selectedBill = billArray[indexfound];
+	$(selectedBill.ID).css("display", "none");
 }
 
 

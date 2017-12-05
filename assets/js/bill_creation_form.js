@@ -84,7 +84,7 @@ var incomplete = false;
 function validate(){
 	
 var bills = JSON.parse(localStorage.bills);
-var newID = 'card' + (bills.length + 11).toString();
+
 var new_pay = arrayify();
 
 var pay_names = new_pay[0];
@@ -145,6 +145,12 @@ var repeat = document.getElementById('inlineFormCustomSelect2').value;
 	
     var user = JSON.parse(localStorage.user);
     var createdCard = null;
+
+    var newIDString = httpGet("../assets/php/retrieve_last_bill.php");
+	var newIDNum = newIDString.replace('card','');
+	var newIDInt = parseInt(newIDNum);
+	var newID = 'card' + (newIDInt - 1).toString();
+
     var createdCard = cardConstructor(newID, name, date, user.email, pay_names, pay_mail, pay_costs, pay_paid, category, description, paypal, transfer, cash, repeat);
     var billArray = JSON.parse(localStorage.bills);
     billArray.push(createdCard);

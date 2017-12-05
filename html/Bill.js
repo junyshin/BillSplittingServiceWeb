@@ -227,7 +227,7 @@ if(priority == 2){
 
 	if(card.myBill){
 	myalert = alertwarningmine;
-	mypay = '';
+	mypay = paybutton;
 		}
 		
 	else{
@@ -242,7 +242,7 @@ if(priority == 3){
 
 	if(card.myBill){
 	myalert = alertdangermine;
-	mypay = '';
+	mypay = paybutton;
 		}
 		
 	else{
@@ -250,10 +250,8 @@ if(priority == 3){
 	mypay = paybutton;
 		}
 	}
-
 	var indexString = card.ID.toString();
 	var index = parseInt(indexString.replace("card",""));
-
 	var newcontent = document.createElement(card.ID);
     newcontent.innerHTML = '<div id="' + card.ID + '" class="container">\
 		<div onClick="goto(' + index + ')" style="background:white"' + myoutline + '>\
@@ -263,7 +261,7 @@ if(priority == 3){
 		  <priority style="display:none">' + priority + '</priority>\
           <div class="card-header">\
 		    <div style="float:right">\
-			<a style="text-decoration:none; color:black;" href="javascript:void(0)" onClick="HideCard(' + card.ID + ')">\
+			<a style="text-decoration:none; color:black;" href="javascript:void(0)" onClick="HideCard(' + index + ')">\
 			<strong>X</strong>\
 			</a>\
 			</div>\

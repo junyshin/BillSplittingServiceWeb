@@ -27,7 +27,6 @@ for(i = 0; i < selectedBill.pay_costs.length; i++){
 total = total + selectedBill.ammount;
 total = total.toFixed(2);
 
-
 document.getElementById('total').innerHTML = total;
 document.getElementById('comment').innerHTML = selectedBill.description;
 document.getElementById('repeat').innerHTML = selectedBill.repeat;
@@ -60,7 +59,7 @@ else{
 document.getElementById('cash').innerHTML = "&#10008";
 	}
 
-
+var number = 0;
 for(index = 0; index < selectedBill.payers.length; index++) {
     var checked = null;
     var paid = null;
@@ -79,10 +78,11 @@ for(index = 0; index < selectedBill.payers.length; index++) {
     if (selectedBill.pay_mail[index] == (user.email)) {
     }
     else {
+        number = number + 1;
         var newPayer = document.createElement("tr");
         newPayer.innerHTML = '<tr id=' + '1' + '>\
                 <td class="text-center">\
-                  ' + (index) + '\
+                  ' + number+ '\
                 </td>\
                 <td class="text-center">\
                   <h4>' + selectedBill.payers[index] + '</h4>\
