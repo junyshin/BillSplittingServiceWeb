@@ -32,7 +32,7 @@ document.getElementById('total').innerHTML = total;
 document.getElementById('comment').innerHTML = selectedBill.description;
 document.getElementById('repeat').innerHTML = selectedBill.repeat;
 
-if(selectedBill.paid || selectedBill.myBill){
+if(selectedBill.paid){
 document.getElementById('paid').innerHTML = "&#10004";
 	}
 else{
@@ -61,11 +61,11 @@ document.getElementById('cash').innerHTML = "&#10008";
 	}
 
 
-for(index = 2; index < selectedBill.payers.length + 2; index++) {
+for(index = 0; index < selectedBill.payers.length; index++) {
     var checked = null;
     var paid = null;
 
-    if (selectedBill.pay_paid[index - 2]) {
+    if (selectedBill.pay_paid[index] == 1) {
         checked = "&#10004";
         paid = 'style="color:green"';
     }
@@ -76,22 +76,22 @@ for(index = 2; index < selectedBill.payers.length + 2; index++) {
 
     var user = JSON.parse(localStorage.user);
 
-    if (selectedBill.pay_mail[index - 2] == (user.email)) {
+    if (selectedBill.pay_mail[index] == (user.email)) {
     }
     else {
         var newPayer = document.createElement("tr");
         newPayer.innerHTML = '<tr id=' + '1' + '>\
                 <td class="text-center">\
-                  ' + (index - 2) + '\
+                  ' + (index) + '\
                 </td>\
                 <td class="text-center">\
-                  <h4>' + selectedBill.payers[index - 2] + '</h4>\
+                  <h4>' + selectedBill.payers[index] + '</h4>\
                 </td>\
                 <td class="text-center">\
-                  <h4>' + selectedBill.pay_mail[index - 2] + '</h4>\
+                  <h4>' + selectedBill.pay_mail[index] + '</h4>\
                 </td>\
                 <td ' + paid + ' class="text-center">\
-                  <h4>' + selectedBill.pay_costs[index - 2].toFixed(2) + '</h4>\
+                  <h4>' + selectedBill.pay_costs[index].toFixed(2) + '</h4>\
                 </td>\
                 <td class="text-center" id="paid">\
 				' + checked + '\
