@@ -49,7 +49,7 @@ if (isset($_POST['login']) && !empty($_POST['email']) && !empty($_POST['password
 //        exit();
 //    }
 }
-mysqli_close($conn);
+mysqli_close($mysqli);
 ?>
 
 <html lang="en">
@@ -104,9 +104,8 @@ mysqli_close($conn);
                 <input type="password" name="password" class="form-control" placeholder="Password" required>
                 <button class="btn btn-lg btn-primary btn-block btn-signin" type="submit" name="login">Sign in</button>
             </form><!-- /form -->
-            <a href="registration.php" class="forgot-password">
-                Create an account
-            </a>
+            <a href="registration.php" class="create_account">Create an account</a>
+            <a href="" class="forgot-password">Forgot Password - Not available</a>
         </div><!-- /card-container -->
     </div><!-- /container -->
 

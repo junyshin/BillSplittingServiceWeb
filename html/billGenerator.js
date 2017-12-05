@@ -126,11 +126,11 @@ $( document ).ready(function() {
 	var cards = JSON.parse(httpGet("../assets/php/retrieve_bills.php?user="+id));
 	var card7 = cards[0];
 
-    var url = "../assets/php/add_bill.php?id="+card5.ID+"&name="+card5.name+"&date="+card5.date+"&payee="+card5.payee+"&names="+card5.payers.toString()+"&mails="+card5.pay_mail.toString()+"&costs="+card5.pay_costs.toString()+"&paid="+card5.pay_paid.map(Number).toString()+"&cat="+card5.category+"&desc="+card5.description+"&paypal="+Number(card5.paypal)+"&transfer="+Number(card5.transfer)+"&cash="+Number(card5.cash)+"&repeat="+card5.repeat;
-    var success = httpGet(url);
+    // var url = "../assets/php/add_bill.php?id="+card5.ID+"&name="+card5.name+"&date="+card5.date+"&payee="+card5.payee+"&names="+card5.payers.toString()+"&mails="+card5.pay_mail.toString()+"&costs="+card5.pay_costs.toString()+"&paid="+card5.pay_paid.map(Number).toString()+"&cat="+card5.category+"&desc="+card5.description+"&paypal="+Number(card5.paypal)+"&transfer="+Number(card5.transfer)+"&cash="+Number(card5.cash)+"&repeat="+card5.repeat;
+    // var success = httpGet(url);
 
-    var url2 = "../assets/php/update_bill.php?id="+card5.ID+"&name="+card2.name+"&date="+card5.date+"&payee="+card5.payee+"&names="+card5.payers.toString()+"&mails="+card5.pay_mail.toString()+"&costs="+card5.pay_costs.toString()+"&paid="+card5.pay_paid.map(Number).toString()+"&cat="+card5.category+"&desc="+card5.description+"&paypal="+Number(card5.paypal)+"&transfer="+Number(card5.transfer)+"&cash="+Number(card5.cash)+"&repeat="+card5.repeat;
-    var success2 = httpGet(url2);
+    // var url2 = "../assets/php/update_bill.php?id="+card5.ID+"&name="+card2.name+"&date="+card5.date+"&payee="+card5.payee+"&names="+card5.payers.toString()+"&mails="+card5.pay_mail.toString()+"&costs="+card5.pay_costs.toString()+"&paid="+card5.pay_paid.map(Number).toString()+"&cat="+card5.category+"&desc="+card5.description+"&paypal="+Number(card5.paypal)+"&transfer="+Number(card5.transfer)+"&cash="+Number(card5.cash)+"&repeat="+card5.repeat;
+    // var success2 = httpGet(url2);
 
     card1 = cardConstructor(card7.id, card7.name, card7.due, card7.payeemail, card7.paynames.split(','), card7.paymail.split(','), card7.paycost.split(',').map(Number), card7.paypaid.split(',').map(Number), card7.category, card7.description, Number(card7.paypal), Number(card7.transfer), Number(card7.cash), card7.repeat);
 	billArray.push(card1);

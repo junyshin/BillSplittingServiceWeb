@@ -22,19 +22,15 @@ session_start();
         exit();
     }
 
-    $result = mysqli_query($mysqli,"SELECT email, password, firstname, lastname, id FROM users");
+    $result = mysqli_query($mysqli,"SELECT password, id FROM users");
 
     if (isset($_POST['change']) && !empty($_POST['new_password']) && !empty($_POST['new_password_dup'])) {
-        $email_reg = $_POST['email'];
-        $password_reg = $_POST['password'];
-        $firsname_reg = $_POST['firstname'];
-        $lastname_reg = $_POST['lastname'];
-        $repassword_reg = $_POST['retypepassword'];
-
-        $result = mysqli_query($mysqli,"SELECT email, id FROM users");
+        $new_password_reg = $_POST['new_password'];
+        $new_password_dup_reg = $_POST['new_password_dup'];
+        $userID = $_POST['userId'];
 
         while ($row = mysqli_fetch_array($result, MYSQLI_NUM)) {
-            if ($_POST['email'] == $row[0]){
+            if ($_POST['new_password']==$row[0] && $_POST['userId'] == $row[1]){
                 $exitvalue = 0;
                 break;
             }else {
@@ -43,24 +39,13 @@ session_start();
         }
 
     if ($exitvalue == 0){
-        $msg = "This email exist already. Please choose another";
+        $msg = "You entered the same password. Please select a new one.";
     }else {
-
-        if ($password_reg == $repassword_reg){
-            $sql = "INSERT INTO users (firstname, lastname, email, password)
-                  VALUES ('$firsname_reg', '$lastname_reg', '$email_reg', '$password_reg')";
+        if ($new_password_dup_reg == $new_password_reg){
+            $sql = "UPDATE users SET password=" . $new_password_reg . "WHERE id=" . $userID;
 
             if (mysqli_query($mysqli, $sql)) {
-                $msg = "New record created successfully";
-
-                $result = mysqli_query($mysqli,"SELECT email, id FROM users");
-                while ($row = mysqli_fetch_array($result, MYSQLI_NUM)) {
-                    if ($email_reg == $row[0]){
-                        $userId = $row[1];
-                        $exitvalue = 1;
-                        break;
-                    }
-                }
+                $msg = "Password was changed successfully";
             } else {
                 $msg = "Error: " . $sql . "<br>" . mysqli_error($mysqli);
                 exit();
@@ -68,7 +53,6 @@ session_start();
         }else {
             $msg = $msg . "\nNot the same password. Please try again";
         }
-
     }
 }
 
@@ -125,8 +109,8 @@ mysqli_close($mysqli);
           <p class = "form-signin-heading"><?php echo $msg; ?></p>
           <form class="form-signin" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']);?>" method="post">
               <h4>New Password:</h4>
-              <input type="text" name="new_password" placeholder="New password" required autofocus/>
-              <input type="text" name="new_password_dup" placeholder="Re-type new password" required/>
+              <input type="password" name="new_password" placeholder="New password" required autofocus/>
+              <input type="password" name="new_password_dup" placeholder="Re-type new password" required/>
               <button type="submit" name="change">Submit</button>
           </form>
           <a href="loginPage.php"><h3>Log out</h3></a>
