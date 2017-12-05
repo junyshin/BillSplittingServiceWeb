@@ -151,9 +151,9 @@ $( document ).ready(function() {
 	})
 });
 
-function goto(card){
+function goto(index){
 		if(duegoto){
-		localStorage.viewedBill = JSON.stringify(card);
+		localStorage.selectedBill = JSON.stringify(index);
 		document.location.href = ("bill_view.html");
 		}
 		duegoto = true;

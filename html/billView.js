@@ -1,7 +1,14 @@
 $( document ).ready(function() {
     var user;
-    var selectedBill;
-    selectedBill = JSON.parse(localStorage.viewedBill);
+    var billArray = JSON.parse(localStorage.bills);
+	var index = JSON.parse(localStorage.selectedBill);
+	var searchString = "card" + index.toString();
+	var IDArray = [];
+	for(var i = 0; i <billArray.length; i++){
+		IDArray[i] = billArray[i].ID;
+	}
+	var indexfound = IDArray.indexOf(searchString);
+	var selectedBill = billArray[indexfound];
     user = JSON.parse(localStorage.user);
 
 document.getElementById('username2').innerHTML = user.name;

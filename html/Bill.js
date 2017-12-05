@@ -1,27 +1,3 @@
-var billArray = [];
-
-var templateCard = {
-	ID : null,
-	date : null,
-	name : null,
-	payee : null,
-	payers : null,
-	pay_mail : null,
-	pay_costs : null,
-	pay_paid : null,
-	priority : null,
-	ammount : null,
-	paid : null,
-	myBill : null,
-	category : null,
-	datestr : null,
-	description : null,
-	paypal : null,
-	transfer : null,
-	cash : null,
-	repeat : null
-}
-
 function findPayeeIndex(email_array, payee_email){
 	for(i = 0; i < email_array.length; i++){
 		if(payee_email == email_array[i]){
@@ -38,13 +14,33 @@ function findUserIndex(email_array, user_email){
 	}
 }
 
-function cardConstructor(ID, name, due, payee_email, pay_names, pay_mail, pay_costs, pay_paid, category, description, paypal, transfer, cash, repeat) {
+function cardConstructor(index, ID, name, due, payee_email, pay_names, pay_mail, pay_costs, pay_paid, category, description, paypal, transfer, cash, repeat) {
 	var user = JSON.parse(localStorage.user);
 
 	var payeeIndex = findPayeeIndex(pay_mail, payee_email);
 	var userIndex = findUserIndex(pay_mail, user.email);
 	
-	var newCard = templateCard;
+	var newCard =  {
+        ID : null,
+        date : null,
+        name : null,
+        payee : null,
+        payers : null,
+        pay_mail : null,
+        pay_costs : null,
+        pay_paid : null,
+        priority : null,
+        ammount : null,
+        paid : null,
+        myBill : null,
+        category : null,
+        datestr : null,
+        description : null,
+        paypal : null,
+        transfer : null,
+        cash : null,
+        repeat : null
+    };
 
     var newId = ID.replace(/bill/i, 'card');
 	newCard.ID = newId;
@@ -74,7 +70,7 @@ function cardConstructor(ID, name, due, payee_email, pay_names, pay_mail, pay_co
 	newCard.pay_costs = pay_costs;
 	newCard.pay_paid = pay_paid;
 	
-	return newCard;
+	billArray[index] = newCard;
 	}
 	
 Date.prototype.yyyymmdd = function() {
@@ -257,9 +253,13 @@ if(priority == 3){
 	mypay = paybutton;
 		}
 	}
+
+	var indexString = card.ID.toString();
+	var index = parseInt(indexString.replace("card",""));
+
 	var newcontent = document.createElement(card.ID);
     newcontent.innerHTML = '<div id="' + card.ID + '" class="container">\
-		<div onClick="goto(' + card.ID + ')" style="background:white"' + myoutline + '>\
+		<div onClick="goto(' + index + ')" style="background:white"' + myoutline + '>\
 		  <date style="display:none">' + card.date +'</date>\
 		  <name style="display:none">' + card.name + '</name>\
 		  <category style="display:none">' + card.category + '</category>\
@@ -328,13 +328,13 @@ function closepopup(id) {
 };
 
 function PayCard(id) {
-    event.cancelBubble = true;
-    if(event.stopPropagation) event.stopPropagation();
+	duegoto = false;
 	$(id).css("display", "block");
 }
 
 function payPopup(id, index) {
 	billArray[index].paid = true;
+
 	$(id).css("display", "none");
 	refreshCards()
 }
