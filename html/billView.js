@@ -27,7 +27,6 @@ for(i = 0; i < selectedBill.pay_costs.length; i++){
 total = total + selectedBill.ammount;
 total = total.toFixed(2);
 
-
 document.getElementById('total').innerHTML = total;
 document.getElementById('comment').innerHTML = selectedBill.description;
 document.getElementById('repeat').innerHTML = selectedBill.repeat;

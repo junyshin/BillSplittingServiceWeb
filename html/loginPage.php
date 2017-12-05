@@ -49,7 +49,7 @@ if (isset($_POST['login']) && !empty($_POST['email']) && !empty($_POST['password
 //        exit();
 //    }
 }
-mysqli_close($conn);
+mysqli_close($mysqli);
 ?>
 
 <html lang="en">

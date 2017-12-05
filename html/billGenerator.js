@@ -13,7 +13,7 @@ $( document ).ready(function() {
     // var success2 = httpGet(url2);
 
 	for(var i = 0; i < cards.length; i++){
-        billArray[i] = cardConstructor(cards[i].id, cards[i].name, cards[i].due, cards[i].payeemail, cards[i].paynames.split(','), cards[i].paymail.split(','), cards[i].paycost.split(',').map(Number), cards[i].paypaid.split(',').map(Number), cards[i].category, cards[i].description, Number(cards[i].paypal), Number(cards[i].transfer), Number(cards[i].cash), cards[i].repeat);
+        billArray[i] = cardConstructor(cards[i].id, cards[i].name, cards[i].due, cards[i].payeemail, cards[i].paynames.split(','), cards[i].paymail.split(','), cards[i].paycost.split(',').map(Number), cards[i].paypaid.split(',').map(Number), cards[i].category, cards[i].description, Number(cards[i].paypal), Number(cards[i].transfer), Number(cards[i].cash), cards[i].frequency);
 	}
 	localStorage.bills = JSON.stringify(billArray);
 	generated();
