@@ -9,7 +9,12 @@ require_once 'data_conn.php';
 
 $billID = $_GET["id"];
 $payer = $_GET["user"];
-$result = $conn->query("DELETE '$billID' From Bills WHERE Payer='$payer'");
 
-echo $result;
-?>
+$sql = "DELETE '$billID' FROM bills WHERE payeemail='$payer'";
+
+$result = $conn -> query($sql);
+if($result === TRUE) {
+    echo "Bill deleted successfully";
+} else {
+    echo "Error: " . $conn->error;
+}?>

@@ -1,26 +1,29 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Mikambi
- * Date: 23/11/2017
- * Time: 22:33
- */
+
 require_once 'data_conn.php';
 
 $billID = $_GET["id"];
 $name = $_GET["name"];
 $date = $_GET["date"];
-$category = $_GET["category"];
-$payment = $_GET["payment"];
-$picture = $_GET["picture"];
-$comment = $_GET["comment"];
-$frequency = $_GET["frequency"];
-$status = $_GET["status"];
-$amount = $_GET["amount"];
-$payer = $_GET["payer"];
 $payee = $_GET["payee"];
+$paynames = $_GET["names"];
+$paymail = $_GET["mails"];
+$paycost = $_GET["costs"];
+$paypaid = $_GET["paid"];
+$category = $_GET["cat"];
+$description = $_GET["desc"];
+$paypal = $_GET["paypal"];
+$transfer = $_GET["transfer"];
+$cash = $_GET["cash"];
+$repeat = $_GET["repeat"];
 
-$result = $conn -> query("Insert into Bills (Billname,Due,Label,Payment,Picture,Comment,Frequency,Status,Amount,Payee,Payer) VALUES 
-                            ('$name','$data','$category','$payment','$picture','$comment','$frequency','$status','$amount','$payee','$payer')");
-echo $result;
+
+$sql = "INSERT INTO bills (id, name, due, payeemail, paynames, paymail, paycost, paypaid, category, description, paypal, transfer, cash, frequency) VALUES ('$billID','$name','$date','$payee','$paynames','$paymail','$paycost','$paypaid','$category','$description','$paypal','$transfer','$cash','$repeat')";
+
+$result = $conn -> query($sql);
+if($result === TRUE) {
+    echo "Created successfully";
+} else {
+    echo "Error: " . $conn->error;
+}
 ?>

@@ -50,7 +50,7 @@ function cardConstructor(ID, name, due, payee_email, pay_names, pay_mail, pay_co
 	newCard.ID = newId;
 	newCard.name = name;
 	newCard.date = parseInt(due);
-	newCard.payee = pay_names[payeeIndex];
+	newCard.payee = pay_mail[payeeIndex];
 	
 	newCard.ammount = pay_costs[userIndex];
 	newCard.paid = pay_paid[userIndex];
