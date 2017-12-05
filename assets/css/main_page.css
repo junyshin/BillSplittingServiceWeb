@@ -93,3 +93,13 @@ li a:hover:not(.active) {
     left: -20px;
 
 }
+
+.loading {
+    display: block;
+    position: absolute;
+    top:30vh;
+    left:20VW;
+    z-index: 100;
+    background-color: black;
+    font-size: 100em;
+}

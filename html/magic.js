@@ -1,8 +1,3 @@
-// $(document).onload(function() {
-//
-// 	alert("locked and loaded");
-// });
-
 $( document ).ready(function() {
 var user = JSON.parse(localStorage.user);
 
@@ -120,8 +115,8 @@ $( document ).ready(function() {
 function generated(){
 	billArray.sort(dynamicSort("priority"));
 	billArray.reverse();
-	refreshCards();		
-	}
+	refreshCards();
+}
 
 function reorderCards(order) {
 
