@@ -263,7 +263,7 @@ if(priority == 3){
 		  <priority style="display:none">' + priority + '</priority>\
           <div class="card-header">\
 		    <div style="float:right">\
-			<a style="text-decoration:none; color:black;" href="javascript:void(0)" onClick="HideCard(' + card.ID + ')">\
+			<a style="text-decoration:none; color:black;" href="javascript:void(0)" onClick="HideCard(' + index + ')">\
 			<strong>X</strong>\
 			</a>\
 			</div>\
