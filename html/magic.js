@@ -44,9 +44,17 @@ function dynamicSort(property) {
         sortOrder = -1;
         property = property.substr(1);
     }
-    return function (a,b) {
-        var result = (a[property] < b[property]) ? -1 : (a[property] > b[property]) ? 1 : 0;
-        return result * sortOrder;
+    if(property == "name") {
+        return function (a, b) {
+            var result = (a[property].toLowerCase() < b[property].toLowerCase()) ? -1 : (a[property].toLowerCase() > b[property].toLowerCase()) ? 1 : 0;
+            return result * sortOrder;
+        }
+    }
+    else {
+        return function (a, b) {
+            var result = (a[property] < b[property]) ? -1 : (a[property] > b[property]) ? 1 : 0;
+            return result * sortOrder;
+        }
     }
 }
 
